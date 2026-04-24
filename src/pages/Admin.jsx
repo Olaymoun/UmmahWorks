@@ -211,12 +211,13 @@ function ActiveMentors({ data, onAction, acting }) {
 
   const startEdit = (m) => {
     setEditing(m.id)
-    setEditForm({ name: m.name, role: m.role || '', company: m.company || '', bio: m.bio || '', domains: (m.domains || []).join(', ') })
+    setEditForm({ name: m.name, email: m.email || '', role: m.role || '', company: m.company || '', bio: m.bio || '', domains: (m.domains || []).join(', ') })
   }
 
   const saveEdit = async () => {
     await onAction('update_mentor', editing, {
       name: editForm.name,
+      email: editForm.email,
       role: editForm.role,
       company: editForm.company,
       bio: editForm.bio,
@@ -236,6 +237,7 @@ function ActiveMentors({ data, onAction, acting }) {
           {editing === m.id ? (
             <div>
               <input style={inputStyle} value={editForm.name} onChange={e => setEditForm(f => ({ ...f, name: e.target.value }))} placeholder="Name" />
+              <input style={inputStyle} value={editForm.email} onChange={e => setEditForm(f => ({ ...f, email: e.target.value }))} placeholder="Email" />
               <input style={inputStyle} value={editForm.role} onChange={e => setEditForm(f => ({ ...f, role: e.target.value }))} placeholder="Role" />
               <input style={inputStyle} value={editForm.company} onChange={e => setEditForm(f => ({ ...f, company: e.target.value }))} placeholder="Company" />
               <textarea style={{ ...inputStyle, resize: 'vertical', marginBottom: 8 }} rows={3} value={editForm.bio} onChange={e => setEditForm(f => ({ ...f, bio: e.target.value }))} placeholder="Bio" />

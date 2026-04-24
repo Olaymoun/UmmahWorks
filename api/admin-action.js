@@ -114,10 +114,10 @@ export default async function handler(req, res) {
     }
 
     if (action === 'update_mentor') {
-      const { name, role, company, bio, domains } = fields
+      const { name, email, role, company, bio, domains } = fields
       await sql`
         UPDATE mentors SET
-          name = ${name}, role = ${role}, company = ${company},
+          name = ${name}, email = ${email}, role = ${role}, company = ${company},
           bio = ${bio}, domains = ${domains}
         WHERE id = ${id}
       `
