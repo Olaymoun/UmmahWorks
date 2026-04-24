@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume Templates / UmmahWorks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --paper:#f6f2e8; --ink:#14130f; --ink-2:#3a3830; --muted:#6d685d; --rule:#c9c2ab;
+  --accent:#0b5d3b; --gold:#b08642;
+}
+html,body{font-family:'Inter',sans-serif; background:var(--paper); color:var(--ink); -webkit-font-smoothing:antialiased; min-height:100vh;}
+
+.wrap{max-width:1400px; margin:0 auto; padding:60px 40px 100px;}
+.mast{padding-bottom:28px; border-bottom:1px solid var(--rule); margin-bottom:52px; display:grid; grid-template-columns:1fr auto; gap:40px; align-items:end;}
+.kicker{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.28em; text-transform:uppercase; color:var(--accent); margin-bottom:14px; display:flex; align-items:center; gap:10px;}
+.kicker::before{content:""; width:30px; height:1px; background:var(--accent);}
+h1{font-family:'Fraunces',serif; font-weight:500; font-size:54px; letter-spacing:-.025em; line-height:1.02; margin-bottom:12px;}
+h1 em{font-family:'Instrument Serif',serif; font-style:italic; color:var(--accent); font-weight:400;}
+.lede{font-family:'Fraunces',serif; font-size:18px; line-height:1.6; color:var(--ink-2); max-width:56ch;}
+.mast-meta{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted); text-align:right; line-height:1.8;}
+.mast-meta b{color:var(--ink); font-weight:500;}
+
+.section-label{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--muted); margin-bottom:20px; display:flex; align-items:center; gap:12px;}
+.section-label::after{content:""; flex:1; height:1px; background:var(--rule);}
+
+.grid{display:grid; grid-template-columns:repeat(4, 1fr); gap:22px; margin-bottom:56px;}
+.grid.three{grid-template-columns:repeat(3, 1fr);}
+
+.card{border:1px solid var(--rule); background:#fff; border-radius:2px; overflow:hidden; text-decoration:none; color:inherit; display:flex; flex-direction:column; transition:transform .18s, box-shadow .18s;}
+.card:hover{transform:translateY(-4px); box-shadow:0 28px 56px -20px rgba(20,19,15,.2);}
+
+.thumb{aspect-ratio:4/5; position:relative; overflow:hidden; background:#f0ece0;}
+
+.thumb-frame{
+  position:absolute;
+  top:0; left:0;
+  width:1280px;
+  border:none;
+  pointer-events:none;
+  transform-origin:top left;
+}
+
+/* Card body */
+.card-body{padding:18px 20px 20px;}
+.card-tag{font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--accent); margin-bottom:6px;}
+.card-name{font-family:'Fraunces',serif; font-weight:500; font-size:20px; letter-spacing:-.015em; margin-bottom:6px;}
+.card-name em{font-family:'Instrument Serif',serif; font-style:italic; color:var(--accent); font-weight:400;}
+.card-desc{font-size:12.5px; color:var(--muted); line-height:1.55; margin-bottom:14px;}
+.card-meta{padding-top:12px; border-top:1px solid var(--rule); font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap;}
+
+.foot{margin-top:60px; padding-top:22px; border-top:1px solid var(--rule); display:flex; justify-content:space-between; align-items:center; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--muted);}
+.foot em{font-family:'Instrument Serif',serif; font-style:italic; color:var(--accent); text-transform:none; font-size:13px; letter-spacing:.02em;}
+
+@media(max-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}.grid.three{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.grid,.grid.three{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="mast">
+    <div>
+      <div class="kicker">Resume Templates</div>
+      <h1>Ten templates. <em>Ten different voices.</em></h1>
+      <p class="lede">Each one editable directly in the browser. Click any text to change it. No account, no export limit.</p>
+    </div>
+    <div class="mast-meta"><b>10 templates</b><br>Click to open and edit<br>All text is live-editable</div>
+  </header>
+
+  <div class="section-label">Original three</div>
+  <div class="grid three">
+    <a class="card" href="templates/tech-ic.html">
+      <div class="thumb">
+        <iframe class="thumb-frame" src="templates/tech-ic.html" scrolling="no" tabindex="-1" loading="lazy"></iframe>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">01 / Tech IC</div>
+        <div class="card-name">The <em>Monogram</em></div>
+        <div class="card-desc">Fraunces serif, warm paper, centered crest. Single-column editorial layout for senior engineers.</div>
+        <div class="card-meta"><span>Fraunces + Inter</span><span>Senior IC, Staff</span></div>
+      </div>
+    </a>
+    <a class="card" href="templates/pm-tpm.html">
+      <div class="thumb">
+        <iframe class="thumb-frame" src="templates/pm-tpm.html" scrolling="no" tabindex="-1" loading="lazy"></iframe>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">02 / PM / TPM</div>
+        <div class="card-name">The <em>Blueprint</em></div>
+        <div class="card-desc">Syne bold, dark masthead, impact metric strip. For senior product and program managers.</div>
+        <div class="card-meta"><span>Syne + Inter</span><span>PM, TPM, Director</span></div>
+      </div>
+    </a>
+    <a class="card" href="templates/early-career.html">
+      <div class="thumb">
+        <iframe class="thumb-frame" src="templates/early-career.html" scrolling="no" tabindex="-1" loading="lazy"></iframe>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">03 / Early Career</div>
+        <div class="card-name">The <em>Botanic</em></div>
+        <div class="card-desc">Cormorant Garamond, warm greens, botanical illustration. For career-switchers and early-stage designers.</div>
+        <div class="card-meta"><span>Cormorant + Work Sans</span><span>Early career, Switch</span></div>
+      </div>
+    </a>
+  </div>
+
+  <div class="section-label">Seven new templates</div>
+  <div class="grid">
+    <a class="card" href="templates/ledger.html">
+      <div class="thumb">
+        <iframe class="thumb-frame" src="templates/ledger.html" scrolling="no" tabindex="-1" loading="lazy"></iframe>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">04 / Finance</div>
+        <div class="card-name">The <em>Ledger</em></div>
+        <div class="card-desc">Playfair Display, ivory paper, gold rules, ledger-style metric bar. For finance, strategy, and operations.</div>
+        <div class="card-meta"><span>Playfair + Inter</span><span>Finance, Ops</span></div>
+      </div>
+    </a>
+
+    <a class="card" href="templates/signal.html">
+      <div class="thumb">
+        <iframe class="thumb-frame" src="templates/signal.html" scrolling="no" tabindex="-1" loading="lazy"></iframe>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">05 / Data Science</div>
+        <div class="card-name">The <em>Signal</em></div>
+        <div class="card-desc">IBM Plex Mono, dark terminal, colored tech tags. For data scientists, ML engineers, and analysts.</div>
+        <div class="card-meta"><span>IBM Plex Mono</span><span>Data, ML, AI</span></div>
+      </div>
+    </a>
+
+    <a class="card" href="templates/broadsheet.html">
+      <div class="thumb">
+        <iframe class="thumb-frame" src="templates/broadsheet.html" scrolling="no" tabindex="-1" loading="lazy"></iframe>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">06 / Executive</div>
+        <div class="card-name">The <em>Broadsheet</em></div>
+        <div class="card-desc">UnifrakturMaguntia nameplate, Libre Baskerville, multi-column broadsheet layout. For directors and VPs.</div>
+        <div class="card-meta"><span>Baskerville + Source Sans</span><span>Director, VP, C-suite</span></div>
+      </div>
+    </a>
+
+    <a class="card" href="templates/studio.html">
+      <div class="thumb">
+        <iframe class="thumb-frame" src="templates/studio.html" scrolling="no" tabindex="-1" loading="lazy"></iframe>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">07 / Design</div>
+        <div class="card-name">The <em>Studio</em></div>
+        <div class="card-desc">DM Serif Display at 130px, white space, case-study cards. For product designers and UX professionals.</div>
+        <div class="card-meta"><span>DM Serif + DM Sans</span><span>Design, UX, Creative</span></div>
+      </div>
+    </a>
+
+    <a class="card" href="templates/quarterly.html">
+      <div class="thumb">
+        <iframe class="thumb-frame" src="templates/quarterly.html" scrolling="no" tabindex="-1" loading="lazy"></iframe>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">08 / Growth PM</div>
+        <div class="card-name">The <em>Quarterly</em></div>
+        <div class="card-desc">Barlow Condensed, navy cover band, three-color stripe. For PMs, strategists, and growth leads.</div>
+        <div class="card-meta"><span>Barlow Condensed</span><span>PM, Growth, Strategy</span></div>
+      </div>
+    </a>
+
+    <a class="card" href="templates/grid.html">
+      <div class="thumb">
+        <iframe class="thumb-frame" src="templates/grid.html" scrolling="no" tabindex="-1" loading="lazy"></iframe>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">09 / Engineers</div>
+        <div class="card-name">The <em>Grid</em></div>
+        <div class="card-desc">Swiss International Style, split black/white header, red accent, Space Grotesk. For all levels of engineer.</div>
+        <div class="card-meta"><span>Space Grotesk + Mono</span><span>SWE, all levels</span></div>
+      </div>
+    </a>
+
+    <a class="card" href="templates/correspondent.html">
+      <div class="thumb">
+        <iframe class="thumb-frame" src="templates/correspondent.html" scrolling="no" tabindex="-1" loading="lazy"></iframe>
+      </div>
+      <div class="card-body">
+        <div class="card-tag">10 / Comms</div>
+        <div class="card-name">The <em>Correspondent</em></div>
+        <div class="card-desc">Lora serif, two-color header rule, editorial narrative style. For communications, marketing, and content roles.</div>
+        <div class="card-meta"><span>Lora + Lato</span><span>Comms, Marketing</span></div>
+      </div>
+    </a>
+  </div>
+
+  <footer class="foot">
+    <span>UmmahWorks / Resume Templates</span>
+    <em>Click any text inside a template to edit it.</em>
+    <span>10 of 10</span>
+  </footer>
+</div>
+<script>
+(function() {
+  function scaleFrame(thumb) {
+    var frame = thumb.querySelector('.thumb-frame');
+    if (!frame) return;
+    var scale = thumb.offsetWidth / 1280;
+    var frameH = Math.ceil(thumb.offsetHeight / scale);
+    frame.style.transform = 'scale(' + scale + ')';
+    frame.style.height = frameH + 'px';
+  }
+
+  var thumbs = document.querySelectorAll('.thumb');
+
+  if (window.ResizeObserver) {
+    var ro = new ResizeObserver(function(entries) {
+      entries.forEach(function(e) { scaleFrame(e.target); });
+    });
+    thumbs.forEach(function(t) { ro.observe(t); scaleFrame(t); });
+  } else {
+    function scaleAll() { thumbs.forEach(scaleFrame); }
+    window.addEventListener('resize', scaleAll);
+    scaleAll();
+  }
+})();
+</script>
+</body>
+</html>

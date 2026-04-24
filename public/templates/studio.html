@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mariam Al-Yazidi — Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --white:#ffffff;
+  --off:#fafaf8;
+  --ink:#111111;
+  --ink-2:#333333;
+  --muted:#888888;
+  --rule:#e5e5e5;
+  --accent:#d44b22;
+  --accent-2:#1a1a1a;
+}
+html,body{background:var(--white);color:var(--ink);font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;}
+
+.toolbar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:13px 24px;background:var(--ink);color:var(--white);gap:16px;}
+.toolbar-title{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;}
+.toolbar-hint{font-family:'DM Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.1em;}
+.toolbar-left{display:flex;flex-direction:column;gap:3px;}
+.toolbar-btn{padding:8px 16px;background:var(--accent);color:#fff;border:none;font-family:'DM Sans',sans-serif;font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap;border-radius:1px;}
+.toolbar-btn:hover{background:#b8391a;}
+
+[contenteditable]{outline:none;cursor:text;transition:background .12s;}
+[contenteditable]:hover{background-color:rgba(212,75,34,.08)!important;outline:1px dashed rgba(212,75,34,.4);}
+[contenteditable]:focus{background-color:rgba(212,75,34,.12)!important;outline:2px solid var(--accent);}
+
+.stage{max-width:1280px;margin:0 auto;padding:28px 28px 80px;}
+.resume{background:var(--white);box-shadow:0 60px 120px -40px rgba(0,0,0,.16),0 0 0 1px rgba(0,0,0,.06);}
+
+/* HEADER */
+.header{padding:80px 80px 64px;position:relative;}
+.header-kicker{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);margin-bottom:28px;}
+.name{font-family:'DM Serif Display',serif;font-size:clamp(72px,7.5vw,108px);line-height:.9;letter-spacing:-.04em;color:var(--ink);margin-bottom:0;font-weight:400;}
+.name-second{font-family:'DM Serif Display',serif;font-style:italic;font-size:clamp(72px,7.5vw,108px);line-height:.9;letter-spacing:-.04em;color:var(--accent);margin-bottom:28px;font-weight:400;}
+.title{font-family:'DM Sans',sans-serif;font-weight:400;font-size:20px;color:var(--ink-2);letter-spacing:-.01em;margin-bottom:44px;}
+.header-bottom{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding-top:32px;border-top:1px solid var(--rule);}
+.header-contact{display:flex;gap:32px;flex-wrap:wrap;align-items:center;}
+.contact-item{font-size:13px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:.06em;white-space:nowrap;}
+.contact-item strong{color:var(--ink);font-weight:500;}
+
+.header-summary{font-family:'DM Serif Display',serif;font-size:18px;line-height:1.55;color:var(--ink);font-weight:400;font-style:italic;text-wrap:pretty;}
+
+/* BODY */
+.body{display:grid;grid-template-columns:1fr 340px;}
+.main{padding:52px 0 52px 80px;border-right:1px solid var(--rule);}
+.sidebar{padding:52px 64px 52px 52px;}
+
+/* SECTION */
+.sect{margin-bottom:52px;}
+.sect:last-child{margin-bottom:0;}
+.sect-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);margin-bottom:28px;display:flex;align-items:center;gap:16px;}
+.sect-label::after{content:"";flex:1;height:1px;background:var(--rule);}
+
+/* EXPERIENCE as case study cards */
+.case{display:grid;grid-template-columns:120px 1fr;gap:28px;margin-bottom:36px;padding-bottom:36px;border-bottom:1px solid var(--rule);}
+.case:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.case-date{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--muted);padding-top:6px;line-height:1.7;}
+.case-date strong{display:block;color:var(--ink);font-size:11px;letter-spacing:.04em;margin-bottom:4px;}
+.case-main{}
+.case-title{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400;color:var(--ink);letter-spacing:-.01em;line-height:1.2;margin-bottom:4px;}
+.case-title em{font-style:italic;color:var(--accent);}
+.case-co{font-family:'DM Sans',sans-serif;font-size:13px;color:var(--muted);margin-bottom:14px;font-weight:400;}
+.case-body{display:flex;flex-direction:column;gap:6px;}
+.case-body p{font-size:14px;line-height:1.65;color:var(--ink-2);text-wrap:pretty;}
+.case-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+.case-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;padding:3px 10px;border:1px solid var(--rule);color:var(--muted);white-space:nowrap;}
+
+/* SIDEBAR */
+.side-block{margin-bottom:36px;}
+.side-block:last-child{margin-bottom:0;}
+.side-label{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--rule);}
+
+.skill-item{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--rule);gap:12px;}
+.skill-item:last-child{border-bottom:none;}
+.skill-name{font-size:14px;color:var(--ink);font-weight:500;}
+.skill-level{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--muted);white-space:nowrap;}
+
+.tool-grid{display:flex;flex-wrap:wrap;gap:6px;}
+.tool{font-family:'DM Mono',monospace;font-size:10px;padding:4px 10px;border:1px solid var(--rule);color:var(--ink-2);background:var(--off);}
+
+.edu-item{padding:10px 0;border-bottom:1px solid var(--rule);}
+.edu-item:last-child{border-bottom:none;}
+.edu-deg{font-family:'DM Serif Display',serif;font-size:15px;color:var(--ink);}
+.edu-school{font-size:12.5px;color:var(--muted);margin-top:3px;}
+.edu-yr{font-family:'DM Mono',monospace;font-size:10px;color:var(--accent);margin-top:4px;letter-spacing:.1em;}
+
+/* FOOTER */
+.foot{padding:26px 80px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;}
+.foot-name{font-family:'DM Serif Display',serif;font-style:italic;font-size:20px;color:var(--muted);}
+.foot-meta{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="toolbar-left">
+    <div class="toolbar-title">The Studio, click any text to edit</div>
+    <span class="toolbar-hint">UmmahWorks / Product Design, UX, Creative / Refresh to reset</span>
+  </div>
+  <button class="toolbar-btn" onclick="printSinglePage()">Print PDF</button>
+</div>
+<div class="stage">
+<div class="resume">
+
+<header class="header">
+  <div class="header-kicker" contenteditable="true">Product Designer, 7 years, Senior</div>
+  <div class="name" contenteditable="true">Mariam</div>
+  <div class="name-second" contenteditable="true">Al-Yazidi.</div>
+  <div class="title" contenteditable="true">I design products people figure out without a tutorial.</div>
+  <div class="header-bottom">
+    <div class="header-contact">
+      <span class="contact-item"><strong>Email</strong><br><span contenteditable="true">mariam.alyazidi@gmail.com</span></span>
+      <span class="contact-item"><strong>City</strong><br><span contenteditable="true">San Francisco, CA</span></span>
+      <span class="contact-item"><strong>Portfolio</strong><br><span contenteditable="true">mariam.design</span></span>
+      <span class="contact-item"><strong>LinkedIn</strong><br><span contenteditable="true">linkedin.com/in/mariam</span></span>
+    </div>
+    <div class="header-summary" contenteditable="true">Seven years shipping product design for consumer and enterprise. Best at turning complicated workflows into things that feel obvious. Comfortable owning design systems, running research, and presenting to C-suite.</div>
+  </div>
+</header>
+
+<div class="body">
+  <main class="main">
+    <section class="sect">
+      <div class="sect-label">Work</div>
+
+      <div class="case">
+        <div class="case-date"><strong contenteditable="true">2022, Now</strong><span contenteditable="true">Senior Product Designer</span></div>
+        <div class="case-main">
+          <div class="case-title"><span contenteditable="true">Clearpath</span> <em contenteditable="true">Financial infrastructure for SMBs</em></div>
+          <div class="case-co" contenteditable="true">San Francisco, CA, Series C, 200 employees</div>
+          <div class="case-body">
+            <p contenteditable="true">Led the redesign of the core onboarding flow. Activation rate went from 34% to 61% over three months, adding roughly $8M in annualized recurring revenue based on cohort data.</p>
+            <p contenteditable="true">Built and maintained the product design system from scratch: 140 components, documentation, Figma tokens, and a contribution guide used by four product squads.</p>
+            <p contenteditable="true">Ran 22 user research sessions over 18 months: screener to synthesis to recommendation. Two of these directly reversed roadmap decisions made by the PM team.</p>
+          </div>
+          <div class="case-tags">
+            <span class="case-tag" contenteditable="true">Design System</span>
+            <span class="case-tag" contenteditable="true">Onboarding</span>
+            <span class="case-tag" contenteditable="true">Research</span>
+            <span class="case-tag" contenteditable="true">0 to 1</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="case">
+        <div class="case-date"><strong contenteditable="true">2019, 2022</strong><span contenteditable="true">Product Designer</span></div>
+        <div class="case-main">
+          <div class="case-title"><span contenteditable="true">Fieldset</span> <em contenteditable="true">B2B survey and research platform</em></div>
+          <div class="case-co" contenteditable="true">New York, NY</div>
+          <div class="case-body">
+            <p contenteditable="true">Owned the survey builder from beta to GA, going from a single layout option to a fully flexible drag-and-drop editor used by 4,000 accounts at launch.</p>
+            <p contenteditable="true">Reduced support ticket volume by 40% after shipping a redesigned template library with improved empty-state guidance.</p>
+          </div>
+          <div class="case-tags">
+            <span class="case-tag" contenteditable="true">B2B SaaS</span>
+            <span class="case-tag" contenteditable="true">Builder UI</span>
+            <span class="case-tag" contenteditable="true">GA Launch</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="case">
+        <div class="case-date"><strong contenteditable="true">2017, 2019</strong><span contenteditable="true">Junior Designer</span></div>
+        <div class="case-main">
+          <div class="case-title"><span contenteditable="true">Opal Studio</span> <em contenteditable="true">Product design agency</em></div>
+          <div class="case-co" contenteditable="true">Remote, 12-person agency</div>
+          <div class="case-body">
+            <p contenteditable="true">Worked across eight client engagements in fintech and healthcare, producing wireframes, prototypes, and final Figma deliverables. Owned two projects end-to-end as the sole designer.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sect">
+      <div class="sect-label">Community</div>
+      <div class="case" style="margin-bottom:0;padding-bottom:0;">
+        <div class="case-date"><strong contenteditable="true">2024, Now</strong><span contenteditable="true">Mentor</span></div>
+        <div class="case-main">
+          <div class="case-title">UmmahWorks <em contenteditable="true">Design track</em></div>
+          <div class="case-co" contenteditable="true">Volunteer</div>
+          <div class="case-body">
+            <p contenteditable="true">Portfolio reviews and career guidance for Muslim designers breaking into product roles. Three mentees placed at their target companies in 2024.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="sidebar">
+    <div class="side-block">
+      <div class="side-label">Tools</div>
+      <div class="tool-grid">
+        <span class="tool" contenteditable="true">Figma</span>
+        <span class="tool" contenteditable="true">Protopie</span>
+        <span class="tool" contenteditable="true">Framer</span>
+        <span class="tool" contenteditable="true">Maze</span>
+        <span class="tool" contenteditable="true">Dovetail</span>
+        <span class="tool" contenteditable="true">Notion</span>
+        <span class="tool" contenteditable="true">Jira</span>
+        <span class="tool" contenteditable="true">HTML / CSS</span>
+        <span class="tool" contenteditable="true">Lottie</span>
+      </div>
+    </div>
+
+    <div class="side-block">
+      <div class="side-label">Capabilities</div>
+      <div class="skill-item"><span class="skill-name" contenteditable="true">Visual Design</span><span class="skill-level" contenteditable="true">Expert</span></div>
+      <div class="skill-item"><span class="skill-name" contenteditable="true">User Research</span><span class="skill-level" contenteditable="true">Strong</span></div>
+      <div class="skill-item"><span class="skill-name" contenteditable="true">Design Systems</span><span class="skill-level" contenteditable="true">Expert</span></div>
+      <div class="skill-item"><span class="skill-name" contenteditable="true">Prototyping</span><span class="skill-level" contenteditable="true">Expert</span></div>
+      <div class="skill-item"><span class="skill-name" contenteditable="true">Interaction Design</span><span class="skill-level" contenteditable="true">Strong</span></div>
+      <div class="skill-item"><span class="skill-name" contenteditable="true">Accessibility</span><span class="skill-level" contenteditable="true">Proficient</span></div>
+    </div>
+
+    <div class="side-block">
+      <div class="side-label">Education</div>
+      <div class="edu-item">
+        <div class="edu-deg" contenteditable="true">B.F.A. Interaction Design</div>
+        <div class="edu-school" contenteditable="true">California College of the Arts</div>
+        <div class="edu-yr" contenteditable="true">2017, GPA 3.88</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-deg" contenteditable="true">Google UX Design Certificate</div>
+        <div class="edu-school" contenteditable="true">Coursera, 2019</div>
+      </div>
+    </div>
+
+    <div class="side-block">
+      <div class="side-label">Languages</div>
+      <div class="skill-item"><span contenteditable="true">English</span><span class="skill-level" contenteditable="true">Native</span></div>
+      <div class="skill-item"><span contenteditable="true">Arabic</span><span class="skill-level" contenteditable="true">Fluent</span></div>
+    </div>
+  </aside>
+</div>
+
+<footer class="foot">
+  <span class="foot-name" contenteditable="true">Mariam Al-Yazidi</span>
+  <span class="foot-meta">References on request</span>
+</footer>
+</div>
+</div>
+<script>
+function printSinglePage(){
+  var r=document.querySelector('.resume');
+  var s=document.querySelector('#print-css')||document.createElement('style');
+  s.id='print-css';
+  document.head.appendChild(s);
+  var W=r.scrollWidth,H=r.scrollHeight;
+  var scale=816/W;
+  var scaledH=Math.ceil(H*scale);var pageH=scaledH/96;
+  s.textContent=
+    '@page{size:8.5in '+pageH.toFixed(4)+'in;margin:0;}'+
+    '@media print{'+
+      '.toolbar{display:none!important;}'+
+      'html,body{background:white!important;min-height:0!important;margin:0!important;padding:0!important;height:'+scaledH+'px!important;overflow:hidden!important;}'+
+      '.stage{padding:0!important;margin:0!important;max-width:none!important;width:'+W+'px!important;zoom:'+scale.toFixed(4)+';}'+
+      '.resume{box-shadow:none!important;border-radius:0!important;}'+
+    '}';
+  _showPrintTip();
+}
+function _showPrintTip(){
+  if(!document.getElementById('print-tip-css')){var cs=document.createElement('style');cs.id='print-tip-css';cs.textContent='@media print{#print-tip{display:none!important;}}';document.head.appendChild(cs);}
+  var t=document.getElementById('print-tip');
+  if(!t){
+    t=document.createElement('div');
+    t.id='print-tip';
+    t.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:99999;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif;';
+    t.innerHTML='<div style="background:#fff;padding:36px 40px;max-width:420px;width:90%;border-radius:3px;text-align:center;"><div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#888;margin-bottom:14px;">Before you print</div><div style="font-size:20px;font-weight:700;color:#111;margin-bottom:10px;">Enable Background Graphics</div><div style="font-size:14px;line-height:1.65;color:#555;margin-bottom:28px;">In the print dialog, turn on <strong style="color:#111;">Background graphics</strong> (Chrome / Edge) or <strong style="color:#111;">Background colors &amp; images</strong> (Safari / Firefox) so colors and styling render correctly.</div><button onclick="document.getElementById(\'print-tip\').style.display=\'none\';window.print();" style="padding:12px 32px;background:#111;color:#fff;border:none;border-radius:2px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">Print PDF</button></div>';
+    document.body.appendChild(t);
+  }
+  t.style.display='flex';
+}
+</script>
+
+
+</body>
+</html>

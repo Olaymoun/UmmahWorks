@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hana Siddiqui, Principal Product Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+ --bg:#0c0d0f;
+ --paper:#fafaf7;
+ --paper-2:#eeece3;
+ --ink:#0c0d0f;
+ --ink-2:#3a3d42;
+ --muted:#8a8f96;
+ --line:#e4e2dc;
+ --rule:#cfcdc3;
+ --accent:#ff5a1f;
+ --accent-2:#1d4a2f;
+}
+html,body{background:var(--paper-2); color:var(--ink); font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased; min-height:100vh;}
+.toolbar{position:sticky; top:0; z-index:10; display:flex; justify-content:space-between; align-items:center; padding:14px 28px; background:var(--bg); color:var(--paper); gap:16px;}
+.toolbar-title{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; display:flex; align-items:center; gap:10px; white-space:nowrap;}
+.toolbar-title svg{width:13px; height:13px; color:var(--accent);}
+.toolbar-hint{font-family:'JetBrains Mono',monospace; font-size:10px; color:rgba(250,250,247,.45); letter-spacing:.1em; white-space:nowrap;}
+.toolbar-left{display:flex; flex-direction:column; gap:3px; min-width:0;}
+.toolbar-btn{display:inline-flex; align-items:center; gap:8px; padding:9px 18px; background:var(--accent); color:#fff; border:none; border-radius:2px; font-family:'Inter',sans-serif; font-weight:700; font-size:12px; letter-spacing:.06em; text-transform:uppercase; cursor:pointer; white-space:nowrap;}
+.toolbar-btn:hover{filter:brightness(1.08);}
+.toolbar-btn svg{width:13px; height:13px;}
+[contenteditable]{outline:none; border-radius:2px; cursor:text; transition:background .12s}
+[contenteditable]:hover{background-color:rgba(255,90,31,.09)!important; outline:1px dashed rgba(255,90,31,.5);}
+[contenteditable]:focus{background-color:rgba(255,90,31,.15)!important; outline:2px solid var(--accent);}
+.stage{max-width:1320px; margin:0 auto; padding:28px 28px 80px;}
+.resume{background:var(--paper); border-radius:3px; box-shadow:0 60px 120px -40px rgba(12,13,15,.32), 0 0 0 1px rgba(12,13,15,.06); overflow:hidden; position:relative;}
+.mast{background:var(--bg); color:var(--paper); padding:0; position:relative; overflow:hidden;}
+.mast::before{content:""; position:absolute; top:0; left:0; right:0; height:6px; background:linear-gradient(90deg, var(--accent) 0 62%, var(--accent-2) 62% 100%); z-index:2;}
+.mast .grid-bg{position:absolute; inset:0; opacity:.05; pointer-events:none; background-image:linear-gradient(to right, var(--paper) 1px, transparent 1px),linear-gradient(to bottom, var(--paper) 1px, transparent 1px); background-size:40px 40px;}
+.mast-inner{position:relative; z-index:1; display:grid; grid-template-columns:1.45fr 1fr; gap:0;}
+.mast-left{padding:64px 56px 52px;}
+.mast-right{padding:64px 56px 52px; background:rgba(255,90,31,.04); border-left:1px solid rgba(250,250,247,.08); position:relative;}
+.mast-right::before{content:"A"; position:absolute; top:28px; right:48px; font-family:'Syne',sans-serif; font-weight:800; font-size:200px; color:rgba(255,90,31,.06); letter-spacing:-.06em; line-height:.8; pointer-events:none;}
+.mast-label{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.32em; text-transform:uppercase; color:var(--accent); margin-bottom:28px; display:flex; align-items:center; gap:14px;}
+.mast-label::before{content:""; width:28px; height:1px; background:var(--accent);}
+.mast-name{font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(68px, 8.4vw, 108px); line-height:.9; letter-spacing:-.045em; color:var(--paper); margin-bottom:16px; text-wrap:balance;}
+.mast-name em{font-style:normal; color:var(--accent);}
+.mast-role{font-family:'Inter',sans-serif; font-weight:500; font-size:17px; color:rgba(250,250,247,.75); letter-spacing:.005em; line-height:1.4; margin-bottom:28px; max-width:44ch;}
+.mast-summary{font-family:'Inter',sans-serif; font-size:14.5px; line-height:1.7; color:rgba(250,250,247,.68); max-width:50ch; padding-top:22px; border-top:1px solid rgba(250,250,247,.14);}
+.mast-summary strong{color:var(--paper); font-weight:600;}
+.mast-right-inner{position:relative; z-index:1;}
+.mast-right-label{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:var(--accent); margin-bottom:22px;}
+.contact-row{display:grid; grid-template-columns:80px 1fr; gap:16px; align-items:baseline; padding:12px 0; border-bottom:1px solid rgba(250,250,247,.1); font-size:13px;}
+.contact-row:first-of-type{padding-top:0;}
+.contact-row:last-of-type{border-bottom:none;}
+.contact-row .k{font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,90,31,.9); white-space:nowrap;}
+.contact-row .v{color:rgba(250,250,247,.9); font-family:'Inter',sans-serif; font-size:13px; word-break:break-word;}
+.impact{display:grid; grid-template-columns:repeat(4, 1fr); background:var(--paper); border-bottom:2px solid var(--ink); position:relative;}
+.impact > div{padding:30px 32px 28px; position:relative; border-right:1px solid var(--line);}
+.impact > div:last-child{border-right:none;}
+.impact > div::before{content:""; position:absolute; top:18px; left:32px; width:18px; height:1px; background:var(--accent);}
+.impact .num{font-family:'Syne',sans-serif; font-weight:700; font-size:52px; line-height:1; letter-spacing:-.05em; color:var(--ink); margin-top:20px; margin-bottom:10px;}
+.impact .lbl{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted); line-height:1.55;}
+.body{padding:56px 56px 48px;}
+.sect{margin-bottom:52px;}
+.sect:last-child{margin-bottom:0;}
+.sect-header{display:grid; grid-template-columns:180px 1fr; gap:32px; align-items:baseline; margin-bottom:30px; border-bottom:2px solid var(--ink); padding-bottom:14px;}
+.sect-num{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.24em; text-transform:uppercase; color:var(--muted);}
+.sect-num b{color:var(--accent); font-weight:600;}
+.sect-title{font-family:'Syne',sans-serif; font-weight:700; font-size:34px; letter-spacing:-.025em; color:var(--ink); line-height:1.05;}
+.sect-title em{font-style:italic; color:var(--accent); font-weight:600;}
+.exp-item{display:grid; grid-template-columns:220px 1fr; gap:32px; padding:24px 0; border-bottom:1px dotted var(--rule);}
+.exp-item:last-child{border-bottom:none;}
+.exp-period{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.16em; color:var(--ink); margin-bottom:12px; display:inline-block; padding:5px 10px; border:1.5px solid var(--ink); border-radius:2px; white-space:nowrap;}
+.exp-company-box{font-family:'Syne',sans-serif; font-weight:700; font-size:22px; color:var(--ink); letter-spacing:-.02em; line-height:1.1; margin-bottom:6px;}
+.exp-location{font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--muted); letter-spacing:.16em; text-transform:uppercase; line-height:1.55;}
+.exp-role{font-family:'Inter',sans-serif; font-weight:700; font-size:18px; color:var(--ink); margin-bottom:4px; letter-spacing:-.01em;}
+.exp-subtitle{font-family:'Inter',sans-serif; font-size:13.5px; color:var(--accent); font-weight:500; margin-bottom:18px;}
+.achievement{display:grid; grid-template-columns:32px 1fr; gap:14px; margin-bottom:10px; align-items:flex-start;}
+.ach-mark{font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; color:var(--accent); padding-top:3px; letter-spacing:.06em;}
+.ach-text{font-size:14px; line-height:1.65; color:var(--ink-2); text-wrap:pretty;}
+.ach-text strong{color:var(--ink); font-weight:700; background:rgba(255,90,31,.14); padding:1px 5px; border-radius:2px;}
+.craft-grid{display:grid; grid-template-columns:repeat(3, 1fr); gap:0; border:1px solid var(--line); border-radius:2px; overflow:hidden; background:linear-gradient(180deg, var(--paper), rgba(238,236,227,.3));}
+.craft-col{padding:28px 28px; border-right:1px solid var(--line); position:relative;}
+.craft-col:last-child{border-right:none;}
+.craft-col + .craft-col{background:rgba(255,255,255,.4);}
+.craft-col h3{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.24em; text-transform:uppercase; color:var(--accent); margin-bottom:16px; display:flex; align-items:center; gap:10px; padding-bottom:10px; border-bottom:1px solid var(--line);}
+.craft-col h3::before{content:"▸"; color:var(--ink); font-size:11px;}
+.craft-col h3.mt{margin-top:22px;}
+.comp-list{list-style:none;}
+.comp-list li{font-family:'Syne',sans-serif; font-weight:600; font-size:14px; color:var(--ink); padding:9px 0; border-bottom:1px dotted var(--rule); letter-spacing:-.01em; display:flex; justify-content:space-between; align-items:center; gap:10px;}
+.comp-list li:last-child{border-bottom:none;}
+.comp-list .tag{font-family:'JetBrains Mono',monospace; font-weight:500; font-size:9.5px; letter-spacing:.1em; color:var(--muted); white-space:nowrap;}
+.tools-grid{display:flex; flex-wrap:wrap; gap:6px;}
+.tools-grid span{font-family:'JetBrains Mono',monospace; font-size:10.5px; font-weight:500; padding:5px 11px; background:var(--ink); color:var(--paper); border-radius:2px; letter-spacing:.04em; white-space:nowrap;}
+.tools-grid span.alt{background:var(--paper); color:var(--ink); border:1px solid var(--ink);}
+.edu-item{margin-bottom:16px; padding-bottom:14px; border-bottom:1px dotted var(--rule);}
+.edu-item:last-child{margin-bottom:0; padding-bottom:0; border-bottom:none;}
+.edu-degree{font-family:'Syne',sans-serif; font-weight:700; font-size:15px; color:var(--ink); letter-spacing:-.01em;}
+.edu-school{font-family:'Inter',sans-serif; font-size:12.5px; color:var(--ink-2); margin-top:3px;}
+.edu-year{font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--accent); margin-top:6px; letter-spacing:.1em; font-weight:500;}
+.community{padding:26px 32px; background:linear-gradient(100deg, rgba(29,74,47,.06), rgba(255,90,31,.04)); border:1px solid var(--rule); border-radius:2px; display:grid; grid-template-columns:220px 1fr; gap:32px; align-items:start;}
+.community .exp-period{border-color:var(--accent-2); color:var(--accent-2);}
+.ftr{background:var(--ink); color:var(--paper); padding:22px 56px; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.22em; text-transform:uppercase; display:flex; justify-content:space-between; align-items:center; gap:18px; flex-wrap:wrap;}
+.ftr b{color:var(--accent); font-weight:600;}
+@media screen and (max-width:960px){
+ .mast-inner{grid-template-columns:1fr;}
+ .mast-left, .mast-right{padding:44px 32px 36px;}
+ .mast-right{border-left:none; border-top:1px solid rgba(250,250,247,.08);}
+ .impact{grid-template-columns:repeat(2, 1fr);}
+ .impact > div{border-right:none; border-bottom:1px solid var(--line);}
+ .impact > div:nth-child(odd){border-right:1px solid var(--line);}
+ .body{padding:40px 32px;}
+ .sect-header, .exp-item, .community{grid-template-columns:1fr; gap:14px;}
+ .craft-grid{grid-template-columns:1fr;}
+ .craft-col{border-right:none; border-bottom:1px solid var(--line);}
+ .mast-name{font-size:58px;}
+ .ftr{padding:22px 32px;}
+}
+@media print{
+ @page{margin:0;}
+ *{-webkit-print-color-adjust:exact!important; print-color-adjust:exact!important;}
+ .toolbar{display:none!important;}
+ html,body{background:white; min-height:auto;}
+ .stage{padding:0; max-width:none;}
+ .resume{box-shadow:none; border-radius:0;}
+}
+</style>
+</head>
+<body>
+<div class="toolbar">
+ <div class="toolbar-left">
+ <div class="toolbar-title">
+ <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+ The Blueprint · click any text to edit
+ </div>
+ <span class="toolbar-hint">UmmahWorks / PM · TPM · refresh to reset</span>
+ </div>
+ <button class="toolbar-btn" onclick="printSinglePage()">
+ <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+ Print PDF
+ </button>
+</div>
+<div class="stage">
+ <div class="resume">
+ <header class="mast">
+ <div class="grid-bg"></div>
+ <div class="mast-inner">
+ <div class="mast-left">
+ <div class="mast-label">Principal Product Manager · 2026</div>
+ <h1 class="mast-name"><span contenteditable="true">Hana</span><br><em contenteditable="true">Siddiqui.</em></h1>
+ <div class="mast-role" contenteditable="true">Platform &amp; Infrastructure · Ten years driving product strategy and scale.</div>
+ <p class="mast-summary" contenteditable="true">Ten years driving product strategy for platform and infrastructure teams. Focused on <strong>zero-to-one launches,</strong> scaling internal tooling, and aligning technical roadmaps with revenue goals. Looking for senior leadership roles bridging engineering execution and business strategy.</p>
+ </div>
+ <div class="mast-right">
+ <div class="mast-right-inner">
+ <div class="mast-right-label">On the record</div>
+ <div class="contact-row"><span class="k">Email</span><span class="v" contenteditable="true">hana.siddiqui@gmail.com</span></div>
+ <div class="contact-row"><span class="k">Phone</span><span class="v" contenteditable="true">+1 555 000 0000</span></div>
+ <div class="contact-row"><span class="k">City</span><span class="v" contenteditable="true">Seattle, WA</span></div>
+ <div class="contact-row"><span class="k">LinkedIn</span><span class="v" contenteditable="true">linkedin.com/in/hanasiddiqui</span></div>
+ <div class="contact-row"><span class="k">Portfolio</span><span class="v" contenteditable="true">hanasiddiqui.com</span></div>
+ </div>
+ </div>
+ </div>
+ </header>
+ <div class="impact">
+ <div><div class="num" contenteditable="true">$50M</div><div class="lbl" contenteditable="true">Annual revenue shaped across three product lines</div></div>
+ <div><div class="num" contenteditable="true">08</div><div class="lbl" contenteditable="true">Products launched from zero to one</div></div>
+ <div><div class="num" contenteditable="true">3&times;</div><div class="lbl" contenteditable="true">PM team growth led as a hiring manager</div></div>
+ <div><div class="num" contenteditable="true">400+</div><div class="lbl" contenteditable="true">Internal engineers served by platforms I own</div></div>
+ </div>
+ <div class="body">
+ <section class="sect">
+ <div class="sect-header">
+ <div class="sect-num">/ 01 <b>·</b> Experience</div>
+ <h2 class="sect-title">Impact &amp; <em>Execution</em></h2>
+ </div>
+ <article class="exp-item">
+ <div class="exp-side">
+ <span class="exp-period" contenteditable="true">2022 / NOW</span>
+ <div class="exp-company-box" contenteditable="true">Cloudverse</div>
+ <div class="exp-location" contenteditable="true">Seattle · Platform Group</div>
+ </div>
+ <div class="exp-main">
+ <div class="exp-role" contenteditable="true">Principal Product Manager, Platform</div>
+ <div class="exp-subtitle" contenteditable="true">Reporting to the VP of Platform. Three direct reports.</div>
+ <div class="achievement"><span class="ach-mark">01.</span><span class="ach-text" contenteditable="true">Led the <strong>zero to one</strong> launch of an internal developer platform used by <strong>400+ engineers,</strong> cutting average service launch time from three weeks to two days.</span></div>
+ <div class="achievement"><span class="ach-mark">02.</span><span class="ach-text" contenteditable="true">Owned a <strong>$50M revenue</strong> product line end to end. Defined OKRs, shaped the quarterly roadmap, partnered with sales to close <strong>fifteen enterprise deals.</strong></span></div>
+ <div class="achievement"><span class="ach-mark">03.</span><span class="ach-text" contenteditable="true">Grew the PM team from three to nine. Established a product review cadence, leveling rubric, and onboarding program now adopted company wide.</span></div>
+ </div>
+ </article>
+ <article class="exp-item">
+ <div class="exp-side">
+ <span class="exp-period" contenteditable="true">2019 / 2022</span>
+ <div class="exp-company-box" contenteditable="true">Siftr</div>
+ <div class="exp-location" contenteditable="true">San Francisco · Growth</div>
+ </div>
+ <div class="exp-main">
+ <div class="exp-role" contenteditable="true">Senior Product Manager, Growth</div>
+ <div class="exp-subtitle" contenteditable="true">Owned activation and retention across web and mobile.</div>
+ <div class="achievement"><span class="ach-mark">01.</span><span class="ach-text" contenteditable="true">Drove user activation from <strong>34% to 61%</strong> through an experiment led onboarding redesign, adding <strong>$8M ARR.</strong></span></div>
+ <div class="achievement"><span class="ach-mark">02.</span><span class="ach-text" contenteditable="true">Launched a referral program that became the company's <strong>top acquisition channel</strong> within six months, accounting for 30% of new signups.</span></div>
+ </div>
+ </article>
+ <article class="exp-item">
+ <div class="exp-side">
+ <span class="exp-period" contenteditable="true">2017 / 2019</span>
+ <div class="exp-company-box" contenteditable="true">Revmap</div>
+ <div class="exp-location" contenteditable="true">New York · Marketplace</div>
+ </div>
+ <div class="exp-main">
+ <div class="exp-role" contenteditable="true">Product Manager</div>
+ <div class="exp-subtitle" contenteditable="true">First PM hire at a Series A marketplace startup.</div>
+ <div class="achievement"><span class="ach-mark">01.</span><span class="ach-text" contenteditable="true">Shipped the core marketplace product from beta to <strong>50K users;</strong> owned the roadmap end to end with five engineers and two designers.</span></div>
+ </div>
+ </article>
+ </section>
+ <section class="sect">
+ <div class="sect-header">
+ <div class="sect-num">/ 02 <b>·</b> Craft</div>
+ <h2 class="sect-title">Toolkit &amp; <em>Academic Baseline</em></h2>
+ </div>
+ <div class="craft-grid">
+ <div class="craft-col">
+ <h3>Competencies</h3>
+ <ul class="comp-list">
+ <li contenteditable="true">Product Strategy <span class="tag" contenteditable="true">0 to 1, 1 to N</span></li>
+ <li contenteditable="true">Roadmap Planning <span class="tag" contenteditable="true">Quarterly</span></li>
+ <li contenteditable="true">Data &amp; Experimentation <span class="tag" contenteditable="true">A/B · SQL</span></li>
+ <li contenteditable="true">Stakeholder Alignment <span class="tag" contenteditable="true">Exec</span></li>
+ <li contenteditable="true">Team Building <span class="tag" contenteditable="true">Hiring Mgr</span></li>
+ <li contenteditable="true">Technical Depth <span class="tag" contenteditable="true">CS BG</span></li>
+ </ul>
+ </div>
+ <div class="craft-col">
+ <h3>Tooling</h3>
+ <div class="tools-grid">
+ <span contenteditable="true">Jira</span><span contenteditable="true">Linear</span>
+ <span class="alt" contenteditable="true">Figma</span><span class="alt" contenteditable="true">FigJam</span>
+ <span contenteditable="true">Amplitude</span><span contenteditable="true">Mixpanel</span>
+ <span class="alt" contenteditable="true">Looker</span><span class="alt" contenteditable="true">SQL</span>
+ <span contenteditable="true">Notion</span><span class="alt" contenteditable="true">dbt</span>
+ </div>
+ <h3 class="mt">Certifications</h3>
+ <ul class="comp-list">
+ <li contenteditable="true">CSPO <span class="tag" contenteditable="true">Scrum Alliance</span></li>
+ <li contenteditable="true">AWS Solutions Arch. <span class="tag" contenteditable="true">Associate</span></li>
+ </ul>
+ </div>
+ <div class="craft-col">
+ <h3>Education</h3>
+ <div class="edu-item"><div class="edu-degree" contenteditable="true">MBA, Strategy &amp; Tech</div><div class="edu-school" contenteditable="true">University of Michigan, Ross</div><div class="edu-year" contenteditable="true">2017 · Tauber Institute Fellow</div></div>
+ <div class="edu-item"><div class="edu-degree" contenteditable="true">B.S. Computer Science</div><div class="edu-school" contenteditable="true">University of Texas at Austin</div><div class="edu-year" contenteditable="true">2015 · GPA 3.85</div></div>
+ <h3 class="mt">Languages</h3>
+ <ul class="comp-list">
+ <li contenteditable="true">English <span class="tag" contenteditable="true">Native</span></li>
+ <li contenteditable="true">Arabic <span class="tag" contenteditable="true">Fluent</span></li>
+ <li contenteditable="true">Urdu <span class="tag" contenteditable="true">Conversational</span></li>
+ </ul>
+ </div>
+ </div>
+ </section>
+ <section class="sect">
+ <div class="sect-header">
+ <div class="sect-num">/ 03 <b>·</b> Community</div>
+ <h2 class="sect-title">Community &amp; <em>Ecosystem</em></h2>
+ </div>
+ <div class="community">
+ <div>
+ <span class="exp-period" contenteditable="true">2024 / NOW</span>
+ <div class="exp-company-box" contenteditable="true">UmmahWorks</div>
+ <div class="exp-location" contenteditable="true">Volunteer Mentor</div>
+ </div>
+ <div>
+ <div class="exp-role" contenteditable="true">Senior Mentor, Product Track</div>
+ <div class="exp-subtitle" contenteditable="true">Six mentees placed at senior tech companies in the last year.</div>
+ <div class="achievement"><span class="ach-mark">·</span><span class="ach-text" contenteditable="true">Mentoring aspiring and mid-career PMs across resume, interview, and promotion strategy.</span></div>
+ </div>
+ </div>
+ </section>
+ </div>
+ <footer class="ftr">
+ <span contenteditable="true">Hana Siddiqui / PPM</span>
+ <span><b>References</b> Available on request</span>
+ <span>Designed for UmmahWorks</span>
+ </footer>
+ </div>
+</div>
+<script>
+function printSinglePage() {
+  var toolbar = document.querySelector('.toolbar');
+  var resume  = document.querySelector('.resume');
+  toolbar.style.display = 'none';
+  var W = resume.offsetWidth;
+  var H = resume.offsetHeight;
+  toolbar.style.display = '';
+  var scale   = 816 / W;
+  var scaledH = Math.ceil(H * scale);
+  var pageH   = scaledH / 96;
+  var s = document.getElementById('_ps');
+  if (!s) { s = document.createElement('style'); s.id = '_ps'; document.head.appendChild(s); }
+  s.textContent =
+    '@page{size:8.5in ' + pageH.toFixed(4) + 'in;margin:0;}' +
+    '@media print{' +
+      '.toolbar{display:none!important;}' +
+      'html,body{background:white!important;min-height:0!important;margin:0!important;padding:0!important;' +
+               'height:' + scaledH + 'px!important;overflow:hidden!important;}' +
+      '.stage{padding:0!important;margin:0!important;max-width:none!important;width:' + W + 'px!important;zoom:' + scale.toFixed(4) + ';}' +
+      '.resume{box-shadow:none!important;border-radius:0!important;}' +
+    '}';
+  _showPrintTip();
+}
+function _showPrintTip(){
+  if(!document.getElementById('print-tip-css')){var cs=document.createElement('style');cs.id='print-tip-css';cs.textContent='@media print{#print-tip{display:none!important;}}';document.head.appendChild(cs);}
+  var t=document.getElementById('print-tip');
+  if(!t){
+    t=document.createElement('div');
+    t.id='print-tip';
+    t.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:99999;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif;';
+    t.innerHTML='<div style="background:#fff;padding:36px 40px;max-width:420px;width:90%;border-radius:3px;text-align:center;"><div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#888;margin-bottom:14px;">Before you print</div><div style="font-size:20px;font-weight:700;color:#111;margin-bottom:10px;">Enable Background Graphics</div><div style="font-size:14px;line-height:1.65;color:#555;margin-bottom:28px;">In the print dialog, turn on <strong style="color:#111;">Background graphics</strong> (Chrome / Edge) or <strong style="color:#111;">Background colors &amp; images</strong> (Safari / Firefox) so colors and styling render correctly.</div><button onclick="document.getElementById(\'print-tip\').style.display=\'none\';window.print();" style="padding:12px 32px;background:#111;color:#fff;border:none;border-radius:2px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">Print PDF</button></div>';
+    document.body.appendChild(t);
+  }
+  t.style.display='flex';
+}
+</script>
+</body>
+</html>

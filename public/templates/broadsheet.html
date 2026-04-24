@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khalid Al-Rashid — Engineering Director</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;500;600;700&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --newsprint:#f8f5ee;
+  --newsprint-2:#eee9dc;
+  --ink:#111110;
+  --ink-2:#2e2d2a;
+  --muted:#7a7669;
+  --rule:#c8c2b0;
+  --rule-heavy:#888278;
+  --red:#8b1a1a;
+}
+html,body{background:var(--newsprint-2);color:var(--ink);font-family:'Source Sans 3',sans-serif;-webkit-font-smoothing:antialiased;}
+
+.toolbar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:12px 24px;background:var(--ink);color:var(--newsprint);gap:16px;}
+.toolbar-title{font-family:'Courier Prime',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;}
+.toolbar-hint{font-family:'Courier Prime',monospace;font-size:10px;color:rgba(248,245,238,.45);letter-spacing:.1em;}
+.toolbar-left{display:flex;flex-direction:column;gap:3px;}
+.toolbar-btn{padding:8px 16px;background:var(--red);color:#fff;border:none;font-family:'Source Sans 3',sans-serif;font-weight:700;font-size:11px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap;}
+.toolbar-btn:hover{background:#a52020;}
+
+[contenteditable]{outline:none;cursor:text;transition:background .12s;}
+[contenteditable]:hover{background-color:rgba(139,26,26,.1)!important;outline:1px dashed rgba(139,26,26,.4);}
+[contenteditable]:focus{background-color:rgba(139,26,26,.14)!important;outline:2px solid var(--red);}
+
+.stage{max-width:1300px;margin:0 auto;padding:28px 28px 80px;}
+.resume{background:var(--newsprint);box-shadow:0 60px 120px -40px rgba(17,17,16,.32),0 0 0 1px rgba(17,17,16,.08);overflow:hidden;}
+
+/* BROADSHEET HEADER */
+.mast{padding:28px 52px 0;border-bottom:3px double var(--ink);}
+.mast-top{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:1px solid var(--rule-heavy);margin-bottom:14px;}
+.mast-date{font-family:'Courier Prime',monospace;font-size:11px;color:var(--muted);letter-spacing:.08em;}
+.mast-edition{font-family:'Courier Prime',monospace;font-size:11px;color:var(--muted);letter-spacing:.08em;}
+
+.nameplate{text-align:center;padding:16px 0 14px;border-bottom:3px double var(--ink);}
+.nameplate-flag{font-family:'Libre Baskerville',serif;font-size:clamp(48px,6.5vw,80px);line-height:1;color:var(--ink);letter-spacing:-.02em;margin-bottom:6px;}
+.nameplate-rule{display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:8px;}
+.nameplate-rule .r{flex:1;max-width:200px;height:1px;background:var(--ink);}
+.nameplate-rule .mid{font-family:'Courier Prime',monospace;font-size:11px;color:var(--ink);letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;}
+.nameplate-sub{font-family:'Courier Prime',monospace;font-size:11px;color:var(--muted);letter-spacing:.18em;text-transform:uppercase;}
+
+.contact-strip{display:flex;justify-content:space-between;align-items:center;padding:8px 0 14px;flex-wrap:wrap;gap:10px;}
+.contact-strip .item{font-family:'Courier Prime',monospace;font-size:11px;color:var(--muted);letter-spacing:.06em;display:flex;align-items:center;gap:6px;}
+.contact-strip .item .pipe{color:var(--rule-heavy);}
+
+/* BROADSHEET BODY */
+.body{padding:28px 0 0;}
+.columns-top{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;padding:0 40px;}
+.columns-body{display:grid;grid-template-columns:1.6fr 1fr;gap:0;padding:0 40px 36px;}
+
+/* column dividers */
+.col{padding:0 22px;border-right:1px solid var(--rule);}
+.col:first-child{padding-left:0;}
+.col:last-child{border-right:none;padding-right:0;}
+
+/* headline style */
+.col-hed{font-family:'Libre Baskerville',serif;font-size:22px;font-weight:700;line-height:1.15;letter-spacing:-.01em;color:var(--ink);margin-bottom:10px;text-wrap:balance;}
+.col-hed em{font-style:italic;color:var(--red);}
+.col-byline{font-family:'Courier Prime',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;border-bottom:1px solid var(--rule);padding-bottom:6px;}
+.col-body{font-family:'Libre Baskerville',serif;font-size:13px;line-height:1.72;color:var(--ink-2);text-wrap:pretty;}
+.col-body p{margin-bottom:10px;}
+.col-body p:last-child{margin-bottom:0;}
+
+/* full width divider rule */
+.full-rule{margin:0 40px;border:none;border-top:1px solid var(--rule-heavy);}
+.full-rule.heavy{border-top:2px solid var(--ink);margin:20px 40px;}
+.full-rule.double{border:none;border-top:3px double var(--ink);margin:20px 40px;}
+
+/* EXPERIENCE in newspaper style */
+.exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;padding:0 40px;}
+.exp-col{padding:0 22px;border-right:1px solid var(--rule);}
+.exp-col:first-child{padding-left:0;}
+.exp-col:last-child{border-right:none;padding-right:0;}
+
+.exp-item{margin-bottom:22px;padding-bottom:18px;border-bottom:1px dotted var(--rule);}
+.exp-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0;}
+.exp-hed{font-family:'Libre Baskerville',serif;font-size:15px;font-weight:700;color:var(--ink);line-height:1.2;margin-bottom:2px;}
+.exp-hed em{font-style:italic;font-weight:400;color:var(--red);font-size:14px;}
+.exp-dek{font-family:'Courier Prime',monospace;font-size:10px;letter-spacing:.12em;color:var(--muted);margin-bottom:8px;text-transform:uppercase;}
+.exp-body{font-family:'Libre Baskerville',serif;font-size:12.5px;line-height:1.68;color:var(--ink-2);text-wrap:pretty;}
+.exp-body p{margin-bottom:6px;}
+
+/* sidebar */
+.sidebar-col{padding:0 0 0 22px;}
+.side-block{margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid var(--rule);}
+.side-block:last-child{border-bottom:none;padding-bottom:0;margin-bottom:0;}
+.side-hed{font-family:'Libre Baskerville',serif;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--ink);margin-bottom:10px;border-bottom:1px solid var(--ink);padding-bottom:4px;}
+.side-item{font-family:'Source Sans 3',sans-serif;font-size:13px;line-height:1.6;color:var(--ink-2);padding:5px 0;border-bottom:1px dotted var(--rule);display:flex;justify-content:space-between;align-items:baseline;gap:8px;}
+.side-item:last-child{border-bottom:none;}
+.side-item .k{flex:1;min-width:0;}
+.side-item .v{font-family:'Courier Prime',monospace;font-size:10px;letter-spacing:.1em;color:var(--muted);white-space:nowrap;text-transform:uppercase;}
+
+/* foot */
+.foot{margin:0 40px;border-top:3px double var(--ink);padding:14px 0;display:flex;justify-content:space-between;align-items:center;}
+.foot-l{font-family:'Courier Prime',monospace;font-size:11px;color:var(--muted);letter-spacing:.1em;}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="toolbar-left">
+    <div class="toolbar-title">The Broadsheet, click any text to edit</div>
+    <span class="toolbar-hint">UmmahWorks / Directors, VPs, Senior Executives / Refresh to reset</span>
+  </div>
+  <button class="toolbar-btn" onclick="printSinglePage()">Print PDF</button>
+</div>
+<div class="stage">
+<div class="resume">
+
+<div class="mast">
+  <div class="mast-top">
+    <span class="mast-date" contenteditable="true">New York, NY · April 2026</span>
+    <span class="mast-edition" contenteditable="true">Senior Engineering Leadership · Vol. 12</span>
+  </div>
+  <div class="nameplate">
+    <div class="nameplate-flag" contenteditable="true">Khalid Al-Rashid</div>
+    <div class="nameplate-rule"><div class="r"></div><div class="mid" contenteditable="true">Engineering Director, Platform Infrastructure</div><div class="r"></div></div>
+    <div class="nameplate-sub" contenteditable="true">Fifteen years building and scaling engineering organizations</div>
+  </div>
+  <div class="contact-strip">
+    <span class="item" contenteditable="true">khalid.alrashid@gmail.com</span>
+    <span class="item"><span class="pipe">|</span></span>
+    <span class="item" contenteditable="true">+1 555 000 0000</span>
+    <span class="item"><span class="pipe">|</span></span>
+    <span class="item" contenteditable="true">Seattle, WA</span>
+    <span class="item"><span class="pipe">|</span></span>
+    <span class="item" contenteditable="true">linkedin.com/in/khalidar</span>
+  </div>
+</div>
+
+<div class="body">
+
+  <!-- 3-col summary section -->
+  <div class="columns-top">
+    <div class="col">
+      <div class="col-hed">Director who <em>ships.</em></div>
+      <div class="col-byline">On the record</div>
+      <div class="col-body">
+        <p contenteditable="true">Fifteen years in engineering, the last six in leadership. I build the kind of platform teams that other engineers actually want to work with: clear APIs, honest documentation, and zero drama at the interface.</p>
+        <p contenteditable="true">Most comfortable operating at the intersection of technical depth and organizational design. I hire slow, delegate fast, and write my own escalation postmortems.</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="col-hed">By the numbers, <em>plainly.</em></div>
+      <div class="col-byline">Career metrics</div>
+      <div class="col-body">
+        <p contenteditable="true"><strong>220 engineers</strong> across six teams currently report into my organization.</p>
+        <p contenteditable="true"><strong>99.97% uptime</strong> maintained across core platform services for the past 30 months.</p>
+        <p contenteditable="true"><strong>$12M</strong> in annual infrastructure cost eliminated through two platform consolidation programs.</p>
+        <p contenteditable="true"><strong>34</strong> senior engineer and engineering manager promotions supported over four years.</p>
+      </div>
+    </div>
+    <div class="col">
+      <div class="col-hed">What I am <em>looking for.</em></div>
+      <div class="col-byline">Target role</div>
+      <div class="col-body">
+        <p contenteditable="true">A VP Engineering or Engineering Director role at a company building real infrastructure products. Ideally at growth stage, where the architecture decisions made today will still matter in five years.</p>
+        <p contenteditable="true">Open to remote or Seattle-based. Not interested in roles where my job is to manage PowerPoints upward while engineers figure things out independently.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="full-rule double">
+
+  <!-- Experience 2-col -->
+  <div class="exp-grid">
+    <div class="exp-col">
+      <div class="exp-item">
+        <div class="exp-hed">Engineering Director, Platform <em>Meridian Cloud, 2021, Now</em></div>
+        <div class="exp-dek" contenteditable="true">Seattle, WA · 220 engineers, 6 teams</div>
+        <div class="exp-body">
+          <p contenteditable="true">Took over a platform org with three separate incident postmortems open and a 94% uptime record. Twelve months later: 99.97% uptime, zero open postmortems, and the on-call rotation reduced from 24 engineers to 14 through better runbook coverage and automation.</p>
+          <p contenteditable="true">Led a two-year infrastructure consolidation that merged four separate compute platforms into one shared service, eliminating $12M in annual spend and cutting the number of deployment pipelines from 47 to 9.</p>
+          <p contenteditable="true">Built a technical staff program that has produced six staff engineer promotions in three years, with a promotion-to-attrition ratio of 5:1.</p>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-hed">Senior Engineering Manager <em>Prism Technologies, 2018, 2021</em></div>
+        <div class="exp-dek" contenteditable="true">New York, NY · 40 engineers, 3 teams</div>
+        <div class="exp-body">
+          <p contenteditable="true">Managed the developer platform team from 8 to 40 engineers over 3 years. Shipped the internal CI/CD platform used by 300 engineers, reducing median build time from 28 minutes to 6.</p>
+          <p contenteditable="true">Designed and rolled out the engineering leveling framework now used company-wide, covering levels E3 through E8.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-col" style="display:flex;flex-direction:column;gap:0;">
+      <div class="exp-item">
+        <div class="exp-hed">Engineering Manager <em>Vantage Systems, 2016, 2018</em></div>
+        <div class="exp-dek" contenteditable="true">San Francisco, CA · 12 engineers</div>
+        <div class="exp-body">
+          <p contenteditable="true">First engineering manager hire. Built and ran the API platform team from scratch, shipping a public REST API used by 400 enterprise customers at launch.</p>
+          <p contenteditable="true">Established the team's incident response process, reducing mean time to resolution from 4.2 hours to 38 minutes over 18 months.</p>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-hed">Senior Software Engineer <em>Vantage Systems, 2013, 2016</em></div>
+        <div class="exp-dek" contenteditable="true">San Francisco, CA</div>
+        <div class="exp-body">
+          <p contenteditable="true">Individual contributor on the backend platform team. Led the migration from a monolithic Rails application to a service-oriented architecture in Go, supporting 10x traffic growth without adding headcount.</p>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-hed">Community: UmmahWorks <em>Mentor, 2023, Now</em></div>
+        <div class="exp-dek" contenteditable="true">Volunteer, Engineering Leadership Track</div>
+        <div class="exp-body">
+          <p contenteditable="true">Mentoring Muslim engineers navigating the IC-to-management transition and senior-level job searches.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="full-rule heavy">
+
+  <!-- Bottom: main + sidebar -->
+  <div class="columns-body">
+    <div class="col" style="display:grid;grid-template-columns:1fr 1fr;gap:0;padding:0;">
+      <div class="col" style="padding-left:0;">
+        <div class="side-hed">Education</div>
+        <div class="exp-body">
+          <p contenteditable="true"><strong>M.S. Computer Science</strong><br>Stanford University, 2013</p><br>
+          <p contenteditable="true"><strong>B.S. Electrical Engineering</strong><br>University of Texas at Austin, 2011, GPA 3.9</p>
+        </div>
+      </div>
+      <div class="col">
+        <div class="side-hed">Languages</div>
+        <div class="side-item" style="margin-bottom:4px;"><span class="k" contenteditable="true">English</span><span class="v" contenteditable="true">Native</span></div>
+        <div class="side-item" style="margin-bottom:4px;"><span class="k" contenteditable="true">Arabic</span><span class="v" contenteditable="true">Fluent</span></div>
+        <div class="side-item"><span class="k" contenteditable="true">French</span><span class="v" contenteditable="true">Conversational</span></div>
+      </div>
+    </div>
+    <div class="sidebar-col">
+      <div class="side-block">
+        <div class="side-hed">Technical depth</div>
+        <div class="side-item"><span class="k" contenteditable="true">Go, Python, Java</span><span class="v">Languages</span></div>
+        <div class="side-item"><span class="k" contenteditable="true">Kubernetes, Terraform</span><span class="v">Infra</span></div>
+        <div class="side-item"><span class="k" contenteditable="true">AWS, GCP</span><span class="v">Cloud</span></div>
+        <div class="side-item"><span class="k" contenteditable="true">Postgres, Kafka, Redis</span><span class="v">Data</span></div>
+      </div>
+      <div class="side-block">
+        <div class="side-hed">Domains</div>
+        <div class="side-item"><span class="k" contenteditable="true">Platform Engineering</span></div>
+        <div class="side-item"><span class="k" contenteditable="true">Org Design</span></div>
+        <div class="side-item"><span class="k" contenteditable="true">Incident Management</span></div>
+        <div class="side-item"><span class="k" contenteditable="true">Technical Hiring</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="foot">
+  <span class="foot-l" contenteditable="true">Khalid Al-Rashid</span>
+  <span class="foot-l">References available on request</span>
+  <span class="foot-l">salaam@ummahworks.org</span>
+</div>
+</div>
+</div>
+<script>
+function printSinglePage(){
+  var r=document.querySelector('.resume');
+  var s=document.querySelector('#print-css')||document.createElement('style');
+  s.id='print-css';
+  document.head.appendChild(s);
+  var W=r.offsetWidth,H=r.offsetHeight;
+  var scale=816/W;
+  var scaledH=Math.ceil(H*scale);var pageH=scaledH/96;
+  s.textContent=
+    '@page{size:8.5in '+pageH.toFixed(4)+'in;margin:0;}'+
+    '@media print{'+
+      '.toolbar{display:none!important;}'+
+      'html,body{background:white!important;min-height:0!important;margin:0!important;padding:0!important;height:'+scaledH+'px!important;overflow:hidden!important;}'+
+      '.stage{padding:0!important;margin:0!important;max-width:none!important;width:'+W+'px!important;zoom:'+scale.toFixed(4)+';}'+
+      '.resume{box-shadow:none!important;border-radius:0!important;}'+
+      '.nameplate-flag{font-size:80px!important;}'+
+    '}';
+  _showPrintTip();
+}
+function _showPrintTip(){
+  if(!document.getElementById('print-tip-css')){var cs=document.createElement('style');cs.id='print-tip-css';cs.textContent='@media print{#print-tip{display:none!important;}}';document.head.appendChild(cs);}
+  var t=document.getElementById('print-tip');
+  if(!t){
+    t=document.createElement('div');
+    t.id='print-tip';
+    t.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:99999;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif;';
+    t.innerHTML='<div style="background:#fff;padding:36px 40px;max-width:420px;width:90%;border-radius:3px;text-align:center;"><div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#888;margin-bottom:14px;">Before you print</div><div style="font-size:20px;font-weight:700;color:#111;margin-bottom:10px;">Enable Background Graphics</div><div style="font-size:14px;line-height:1.65;color:#555;margin-bottom:28px;">In the print dialog, turn on <strong style="color:#111;">Background graphics</strong> (Chrome / Edge) or <strong style="color:#111;">Background colors &amp; images</strong> (Safari / Firefox) so colors and styling render correctly.</div><button onclick="document.getElementById(\'print-tip\').style.display=\'none\';window.print();" style="padding:12px 32px;background:#111;color:#fff;border:none;border-radius:2px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">Print PDF</button></div>';
+    document.body.appendChild(t);
+  }
+  t.style.display='flex';
+}
+</script>
+
+
+</body>
+</html>

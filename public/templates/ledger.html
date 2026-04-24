@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nadia Hassan — Financial Analyst</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ivory:#faf7f0;
+  --ivory-2:#f2ede0;
+  --ink:#0f0e0c;
+  --ink-2:#2e2c28;
+  --muted:#7a7468;
+  --rule:#ccc4ad;
+  --gold:#8b6914;
+  --gold-light:#c49a3a;
+  --rust:#7d2e18;
+}
+html,body{background:var(--ivory-2); color:var(--ink); font-family:'Inter',sans-serif; -webkit-font-smoothing:antialiased;}
+
+.toolbar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:13px 24px;background:var(--ink);color:var(--ivory);gap:16px;}
+.toolbar-title{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;}
+.toolbar-hint{font-family:'IBM Plex Mono',monospace;font-size:10px;color:rgba(250,247,240,.45);letter-spacing:.1em;}
+.toolbar-left{display:flex;flex-direction:column;gap:3px;}
+.toolbar-btn{padding:8px 16px;background:var(--gold);color:var(--ink);border:none;border-radius:1px;font-family:'Inter',sans-serif;font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap;}
+.toolbar-btn:hover{background:var(--gold-light);}
+
+[contenteditable]{outline:none;cursor:text;transition:background .12s;}
+[contenteditable]:hover{background-color:rgba(139,105,20,.1)!important;outline:1px dashed rgba(139,105,20,.5);}
+[contenteditable]:focus{background-color:rgba(139,105,20,.15)!important;outline:2px solid var(--gold);}
+
+.stage{max-width:1240px;margin:0 auto;padding:28px 28px 80px;}
+.resume{background:var(--ivory);box-shadow:0 60px 120px -40px rgba(15,14,12,.28),0 0 0 1px rgba(15,14,12,.06);overflow:hidden;}
+
+/* TOP RULE */
+.top-rule{height:6px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 8px);}
+
+/* HEADER */
+.header{padding:52px 60px 42px;border-bottom:2px solid var(--ink);position:relative;}
+.header-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end;}
+.header-left{}
+.header-right{text-align:right;display:flex;flex-direction:column;gap:8px;min-width:200px;}
+
+.header-label{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+.header-label::before{content:"";width:22px;height:1px;background:var(--gold);}
+.name{font-family:'Playfair Display',serif;font-weight:500;font-size:clamp(52px,7vw,80px);line-height:.94;letter-spacing:-.02em;color:var(--ink);margin-bottom:10px;}
+.title{font-family:'Playfair Display',serif;font-style:italic;font-size:22px;color:var(--gold);letter-spacing:.01em;}
+
+.contact-row{display:flex;align-items:baseline;gap:10px;font-size:12.5px;color:var(--ink-2);justify-content:flex-end;}
+.contact-row .k{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.contact-row .v{}
+
+/* LEDGER BANDS */
+.ledger{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:2px solid var(--ink);}
+.ledger-cell{padding:24px 28px;border-right:1px solid var(--rule);position:relative;}
+.ledger-cell:last-child{border-right:none;}
+.ledger-cell::before{content:"";position:absolute;top:14px;left:28px;width:16px;height:1px;background:var(--gold);}
+.ledger-n{font-family:'Playfair Display',serif;font-weight:500;font-size:42px;line-height:1;letter-spacing:-.03em;color:var(--ink);margin-top:16px;margin-bottom:6px;}
+.ledger-n em{font-style:italic;color:var(--gold);font-size:28px;}
+.ledger-l{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);line-height:1.55;}
+
+/* BODY */
+.body{padding:48px 60px;display:grid;grid-template-columns:1fr 260px;gap:48px;}
+
+/* SECTIONS */
+.sect{margin-bottom:42px;}
+.sect:last-child{margin-bottom:0;}
+.sect-head{display:flex;align-items:baseline;gap:18px;margin-bottom:20px;border-bottom:1px solid var(--ink);padding-bottom:8px;}
+.sect-num{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);}
+.sect-title{font-family:'Playfair Display',serif;font-weight:500;font-size:20px;letter-spacing:-.01em;color:var(--ink);}
+.sect-title em{font-style:italic;color:var(--gold);}
+
+/* EXP */
+.exp-item{padding:16px 0;border-bottom:1px dotted var(--rule);}
+.exp-item:last-child{border-bottom:none;}
+.exp-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:4px;flex-wrap:nowrap;}
+.exp-role{font-family:'Playfair Display',serif;font-weight:500;font-size:17px;letter-spacing:-.008em;color:var(--ink);}
+.exp-date{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;color:var(--muted);white-space:nowrap;}
+.exp-company{font-family:'Playfair Display',serif;font-style:italic;font-size:14px;color:var(--gold);margin-bottom:10px;}
+.exp-bullets{list-style:none;padding:0;display:flex;flex-direction:column;gap:5px;}
+.exp-bullets li{font-size:13.5px;line-height:1.65;color:var(--ink-2);padding-left:20px;position:relative;text-wrap:pretty;}
+.exp-bullets li::before{content:"";position:absolute;left:0;top:10px;width:10px;height:1px;background:var(--gold);}
+
+/* RIGHT SIDEBAR */
+.sidebar{}
+.side-block{margin-bottom:28px;}
+.side-block-h{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--rule);}
+
+.skill-item{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;border-bottom:1px dotted var(--rule);font-size:13px;gap:10px;}
+.skill-item:last-child{border-bottom:none;}
+.skill-name{color:var(--ink);font-weight:500;}
+.skill-level{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--muted);white-space:nowrap;}
+
+.tag-list{display:flex;flex-wrap:wrap;gap:5px;}
+.tag{font-family:'IBM Plex Mono',monospace;font-size:10px;padding:3px 8px;border:1px solid var(--rule);color:var(--ink-2);background:var(--ivory-2);}
+
+.edu-item{padding:10px 0;border-bottom:1px dotted var(--rule);}
+.edu-item:last-child{border-bottom:none;}
+.edu-deg{font-family:'Playfair Display',serif;font-weight:500;font-size:14px;color:var(--ink);}
+.edu-school{font-size:12.5px;color:var(--ink-2);margin-top:2px;}
+.edu-yr{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--gold);margin-top:4px;letter-spacing:.1em;}
+
+/* FOOT */
+.foot{padding:24px 60px;border-top:2px solid var(--ink);display:flex;justify-content:space-between;align-items:center;background:var(--ink);color:var(--ivory);}
+.foot-sig{font-family:'Playfair Display',serif;font-style:italic;font-size:15px;color:var(--gold-light);}
+.foot-meta{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(250,247,240,.45);}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="toolbar-left">
+    <div class="toolbar-title">The Ledger, click any text to edit</div>
+    <span class="toolbar-hint">UmmahWorks / Finance, Strategy, Operations / Refresh to reset</span>
+  </div>
+  <button class="toolbar-btn" onclick="printSinglePage()">Print PDF</button>
+</div>
+<div class="stage">
+<div class="resume">
+<div class="top-rule"></div>
+
+<header class="header">
+  <div class="header-grid">
+    <div class="header-left">
+      <div class="header-label">Senior Finance Professional</div>
+      <h1 class="name" contenteditable="true">Nadia Hassan</h1>
+      <div class="title" contenteditable="true">Senior Financial Analyst, Corporate Strategy</div>
+    </div>
+    <div class="header-right">
+      <div class="contact-row"><span class="k">Email</span><span class="v" contenteditable="true">nadia.hassan@gmail.com</span></div>
+      <div class="contact-row"><span class="k">Phone</span><span class="v" contenteditable="true">+1 555 000 0000</span></div>
+      <div class="contact-row"><span class="k">City</span><span class="v" contenteditable="true">New York, NY</span></div>
+      <div class="contact-row"><span class="k">LinkedIn</span><span class="v" contenteditable="true">linkedin.com/in/nadiahassan</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="ledger">
+  <div class="ledger-cell">
+    <div class="ledger-n" contenteditable="true">$4.2B</div>
+    <div class="ledger-l" contenteditable="true">Total assets under analysis across three portfolios</div>
+  </div>
+  <div class="ledger-cell">
+    <div class="ledger-n" contenteditable="true">18<em>%</em></div>
+    <div class="ledger-l" contenteditable="true">Average cost reduction delivered per engagement</div>
+  </div>
+  <div class="ledger-cell">
+    <div class="ledger-n" contenteditable="true">40<em>+</em></div>
+    <div class="ledger-l" contenteditable="true">Financial models built for C-suite decision-making</div>
+  </div>
+  <div class="ledger-cell">
+    <div class="ledger-n" contenteditable="true">8</div>
+    <div class="ledger-l" contenteditable="true">Years in corporate finance and strategy roles</div>
+  </div>
+</div>
+
+<div class="body">
+  <div class="main">
+    <section class="sect">
+      <div class="sect-head"><span class="sect-num">/ 01</span><h2 class="sect-title">Experience</h2></div>
+
+      <div class="exp-item">
+        <div class="exp-top">
+          <div class="exp-role" contenteditable="true">Senior Financial Analyst, Corporate Strategy</div>
+          <div class="exp-date" contenteditable="true">2021, Now</div>
+        </div>
+        <div class="exp-company" contenteditable="true">Meridian Capital Group, New York</div>
+        <ul class="exp-bullets">
+          <li contenteditable="true">Built the annual budget model for a $1.2B business unit, reducing forecast variance from 11% to under 3% across four quarters.</li>
+          <li contenteditable="true">Led a cost optimization analysis across six operating divisions, identifying $38M in savings that were fully implemented within nine months.</li>
+          <li contenteditable="true">Presented monthly financial reviews directly to the CFO and two board members, distilling 200-page reports into five-slide decision briefs.</li>
+          <li contenteditable="true">Managed two junior analysts, including running weekly one-on-ones, quarterly reviews, and one promotion cycle.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-top">
+          <div class="exp-role" contenteditable="true">Financial Analyst, Investment Banking</div>
+          <div class="exp-date" contenteditable="true">2018, 2021</div>
+        </div>
+        <div class="exp-company" contenteditable="true">Ashford Partners, New York</div>
+        <ul class="exp-bullets">
+          <li contenteditable="true">Supported M&amp;A due diligence on seven deals totaling $900M in transaction value, focusing on target company financial modeling and risk assessment.</li>
+          <li contenteditable="true">Built DCF and comparable company analysis for three live pitches, two of which converted to mandates.</li>
+          <li contenteditable="true">Automated recurring reporting using Excel VBA, cutting the weekly close process from 14 hours to 4 hours per analyst.</li>
+        </ul>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-top">
+          <div class="exp-role" contenteditable="true">Finance Associate</div>
+          <div class="exp-date" contenteditable="true">2016, 2018</div>
+        </div>
+        <div class="exp-company" contenteditable="true">Oaktree Consulting, Chicago</div>
+        <ul class="exp-bullets">
+          <li contenteditable="true">Supported senior consultants on four operational finance projects for mid-market clients, producing final deliverables for two engagements independently.</li>
+          <li contenteditable="true">Prepared cash flow projections and break-even analyses used in two client board presentations.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sect">
+      <div class="sect-head"><span class="sect-num">/ 02</span><h2 class="sect-title">Community &amp; Giving Back</h2></div>
+      <div class="exp-item">
+        <div class="exp-top">
+          <div class="exp-role" contenteditable="true">Finance Mentor, UmmahWorks</div>
+          <div class="exp-date" contenteditable="true">2023, Now</div>
+        </div>
+        <div class="exp-company" contenteditable="true">Volunteer</div>
+        <ul class="exp-bullets">
+          <li contenteditable="true">Providing one-on-one guidance to Muslim finance professionals on resume review, offer negotiation, and career pivots into strategy roles.</li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <aside class="sidebar">
+    <div class="side-block">
+      <div class="side-block-h">Core Skills</div>
+      <div class="skill-item"><span class="skill-name" contenteditable="true">Financial Modeling</span><span class="skill-level" contenteditable="true">Advanced</span></div>
+      <div class="skill-item"><span class="skill-name" contenteditable="true">Variance Analysis</span><span class="skill-level" contenteditable="true">Advanced</span></div>
+      <div class="skill-item"><span class="skill-name" contenteditable="true">M&amp;A Due Diligence</span><span class="skill-level" contenteditable="true">Proficient</span></div>
+      <div class="skill-item"><span class="skill-name" contenteditable="true">FP&amp;A</span><span class="skill-level" contenteditable="true">Advanced</span></div>
+      <div class="skill-item"><span class="skill-name" contenteditable="true">Executive Reporting</span><span class="skill-level" contenteditable="true">Advanced</span></div>
+    </div>
+
+    <div class="side-block">
+      <div class="side-block-h">Tools</div>
+      <div class="tag-list">
+        <span class="tag" contenteditable="true">Excel (Advanced)</span>
+        <span class="tag" contenteditable="true">PowerBI</span>
+        <span class="tag" contenteditable="true">Tableau</span>
+        <span class="tag" contenteditable="true">SQL</span>
+        <span class="tag" contenteditable="true">Workday</span>
+        <span class="tag" contenteditable="true">SAP</span>
+        <span class="tag" contenteditable="true">Salesforce</span>
+      </div>
+    </div>
+
+    <div class="side-block">
+      <div class="side-block-h">Education</div>
+      <div class="edu-item">
+        <div class="edu-deg" contenteditable="true">MBA, Finance</div>
+        <div class="edu-school" contenteditable="true">NYU Stern School of Business</div>
+        <div class="edu-yr" contenteditable="true">2016</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-deg" contenteditable="true">B.S. Economics</div>
+        <div class="edu-school" contenteditable="true">University of Michigan</div>
+        <div class="edu-yr" contenteditable="true">2014, GPA 3.82</div>
+      </div>
+    </div>
+
+    <div class="side-block">
+      <div class="side-block-h">Certifications</div>
+      <div class="edu-item">
+        <div class="edu-deg" contenteditable="true">CFA Level III</div>
+        <div class="edu-yr" contenteditable="true">CFA Institute, 2020</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-deg" contenteditable="true">CPA</div>
+        <div class="edu-yr" contenteditable="true">AICPA, 2018</div>
+      </div>
+    </div>
+
+    <div class="side-block">
+      <div class="side-block-h">Languages</div>
+      <div class="skill-item"><span contenteditable="true">English</span><span class="skill-level" contenteditable="true">Native</span></div>
+      <div class="skill-item"><span contenteditable="true">Arabic</span><span class="skill-level" contenteditable="true">Fluent</span></div>
+    </div>
+  </aside>
+</div>
+
+<footer class="foot">
+  <span class="foot-sig" contenteditable="true">Nadia Hassan</span>
+  <span class="foot-meta">References available on request</span>
+</footer>
+</div>
+</div>
+<script>
+function printSinglePage(){
+  var r=document.querySelector('.resume');
+  var s=document.querySelector('#print-css')||document.createElement('style');
+  s.id='print-css';
+  document.head.appendChild(s);
+  var W=r.offsetWidth,H=r.offsetHeight;
+  var scale=816/W;
+  var scaledH=Math.ceil(H*scale);var pageH=scaledH/96;
+  s.textContent=
+    '@page{size:8.5in '+pageH.toFixed(4)+'in;margin:0;}'+
+    '@media print{'+
+      '.toolbar{display:none!important;}'+
+      'html,body{background:white!important;min-height:0!important;margin:0!important;padding:0!important;height:'+scaledH+'px!important;overflow:hidden!important;}'+
+      '.stage{padding:0!important;margin:0!important;max-width:none!important;width:'+W+'px!important;zoom:'+scale.toFixed(4)+';}'+
+      '.resume{box-shadow:none!important;border-radius:0!important;}'+
+      '.name{font-size:80px!important;}'+
+    '}';
+  _showPrintTip();
+}
+function _showPrintTip(){
+  if(!document.getElementById('print-tip-css')){var cs=document.createElement('style');cs.id='print-tip-css';cs.textContent='@media print{#print-tip{display:none!important;}}';document.head.appendChild(cs);}
+  var t=document.getElementById('print-tip');
+  if(!t){
+    t=document.createElement('div');
+    t.id='print-tip';
+    t.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:99999;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif;';
+    t.innerHTML='<div style="background:#fff;padding:36px 40px;max-width:420px;width:90%;border-radius:3px;text-align:center;"><div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#888;margin-bottom:14px;">Before you print</div><div style="font-size:20px;font-weight:700;color:#111;margin-bottom:10px;">Enable Background Graphics</div><div style="font-size:14px;line-height:1.65;color:#555;margin-bottom:28px;">In the print dialog, turn on <strong style="color:#111;">Background graphics</strong> (Chrome / Edge) or <strong style="color:#111;">Background colors &amp; images</strong> (Safari / Firefox) so colors and styling render correctly.</div><button onclick="document.getElementById(\'print-tip\').style.display=\'none\';window.print();" style="padding:12px 32px;background:#111;color:#fff;border:none;border-radius:2px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">Print PDF</button></div>';
+    document.body.appendChild(t);
+  }
+  t.style.display='flex';
+}
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zainab Tahir, Junior Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Work+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+ --paper:#f5f1e8;
+ --paper-2:#eae2cc;
+ --cream:#fbf7ee;
+ --ink:#1f2a1d;
+ --ink-2:#3e4a3c;
+ --muted:#7a7f6c;
+ --rule:#c8c0a6;
+ --leaf:#5a7a3e;
+ --leaf-dark:#304222;
+ --berry:#b84a3e;
+ --gold:#c49a3a;
+}
+html,body{background:var(--paper-2); color:var(--ink); font-family:'Work Sans',sans-serif; -webkit-font-smoothing:antialiased; min-height:100vh;}
+
+/* toolbar */
+.toolbar{
+ position:sticky; top:0; z-index:10;
+ display:flex; justify-content:space-between; align-items:center;
+ padding:14px 28px; background:var(--leaf-dark); color:var(--cream); gap:16px;
+}
+.toolbar-title{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.14em; text-transform:uppercase; display:flex; align-items:center; gap:10px; white-space:nowrap;}
+.toolbar-title svg{width:13px; height:13px; color:var(--gold);}
+.toolbar-hint{font-family:'JetBrains Mono',monospace; font-size:10px; color:rgba(251,247,238,.5); letter-spacing:.1em; white-space:nowrap;}
+.toolbar-left{display:flex; flex-direction:column; gap:3px; min-width:0;}
+.toolbar-btn{display:inline-flex; align-items:center; gap:8px; padding:9px 20px; background:var(--gold); color:var(--leaf-dark); border:none; border-radius:30px; font-family:'Work Sans',sans-serif; font-weight:600; font-size:12px; letter-spacing:.06em; text-transform:uppercase; cursor:pointer; white-space:nowrap;}
+.toolbar-btn:hover{filter:brightness(1.06);}
+.toolbar-btn svg{width:13px; height:13px;}
+
+[contenteditable]{outline:none; border-radius:3px; cursor:text; transition:background .12s}
+[contenteditable]:hover{background-color:rgba(90,122,62,.1)!important; outline:1px dashed rgba(90,122,62,.5);}
+[contenteditable]:focus{background-color:rgba(90,122,62,.16)!important; outline:2px solid var(--leaf);}
+
+.stage{max-width:1280px; margin:0 auto; padding:28px 28px 80px;}
+
+.resume{
+ background:var(--paper);
+ box-shadow:0 60px 120px -40px rgba(31,42,29,.3), 0 0 0 1px rgba(31,42,29,.06);
+ border-radius:4px; overflow:hidden; position:relative;
+}
+
+/* ===== MASTHEAD, wide botanical hero ===== */
+.mast{
+ padding:64px 64px 48px;
+ background:
+ radial-gradient(circle at 92% 14%, rgba(196,154,58,.18), transparent 55%),
+ radial-gradient(circle at 8% 90%, rgba(90,122,62,.14), transparent 55%),
+ var(--paper);
+ border-bottom:1px solid var(--rule);
+ position:relative;
+ display:grid; grid-template-columns:180px 1fr 320px; gap:44px; align-items:end;
+}
+.botany-tl{
+ position:absolute; top:22px; left:22px; width:96px; height:96px;
+ color:var(--leaf); opacity:.32; pointer-events:none;
+}
+.botany-br{
+ position:absolute; bottom:22px; right:22px; width:120px; height:120px;
+ color:var(--berry); opacity:.22; pointer-events:none;
+}
+
+.avatar-wrap{
+ position:relative; width:180px; height:180px;
+}
+.avatar-wrap::before{content:""; position:absolute; inset:-12px; border:1px solid var(--rule); border-radius:50%;}
+.avatar-wrap::after{content:""; position:absolute; inset:-22px; border:1px dashed rgba(196,154,58,.5); border-radius:50%;}
+.avatar{
+ width:100%; height:100%; border-radius:50%;
+ background:linear-gradient(150deg, #e5d5a8, #b8a070);
+ display:flex; align-items:center; justify-content:center;
+ font-family:'Cormorant Garamond',serif; font-weight:500; font-size:70px;
+ color:var(--leaf-dark); letter-spacing:-.02em;
+ border:4px solid var(--cream); position:relative; z-index:1;
+}
+.avatar-leaves{
+ position:absolute; top:-14px; right:-14px; width:62px; height:62px;
+ color:var(--gold); z-index:2; opacity:.85;
+}
+
+.mast-center{min-width:0;}
+.mast-kicker{
+ font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.3em;
+ text-transform:uppercase; color:var(--muted); margin-bottom:14px;
+ display:flex; align-items:center; gap:12px; white-space:nowrap;
+}
+.mast-kicker::before{content:""; width:22px; height:1px; background:var(--gold);}
+.mast-name{
+ font-family:'Cormorant Garamond',serif; font-weight:500;
+ font-size:clamp(64px, 8vw, 96px); line-height:.94;
+ letter-spacing:-.02em; color:var(--ink); margin-bottom:10px; text-wrap:balance;
+}
+.mast-name em{font-style:italic; color:var(--berry); font-weight:500;}
+.mast-role{
+ font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:400;
+ font-size:24px; color:var(--leaf); letter-spacing:.005em; line-height:1.25;
+ max-width:32ch;
+}
+
+.mast-right{
+ display:flex; flex-direction:column; gap:8px;
+ padding:22px 22px; border-left:1px solid var(--rule);
+}
+.mast-right-label{
+ font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:.24em;
+ text-transform:uppercase; color:var(--berry); margin-bottom:10px;
+}
+.contact-row{
+ display:grid; grid-template-columns:auto 1fr; gap:12px; align-items:flex-start;
+ padding:8px 0; border-bottom:1px dotted var(--rule); font-size:13px;
+}
+.contact-row:last-child{border-bottom:none;}
+.contact-row svg{width:13px; height:13px; color:var(--leaf); flex-shrink:0; margin-top:3px;}
+.contact-row span{color:var(--ink-2); font-size:13px; line-height:1.5; word-break:break-word;}
+
+/* ===== INTRO STRIP ===== */
+.intro{
+ padding:46px 64px 40px;
+ display:grid; grid-template-columns:180px 1fr 200px; gap:44px; align-items:start;
+ border-bottom:1px solid var(--rule);
+ background:linear-gradient(180deg, rgba(196,154,58,.05), transparent);
+}
+.intro-label{
+ font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.3em;
+ text-transform:uppercase; color:var(--berry); padding-top:12px;
+}
+.intro-label small{display:block; color:var(--muted); font-size:9.5px; letter-spacing:.18em; margin-top:6px;}
+.intro-text{
+ font-family:'Cormorant Garamond',serif; font-weight:400; font-size:22px;
+ line-height:1.48; color:var(--ink); letter-spacing:.005em; text-wrap:pretty;
+}
+.intro-text em{font-style:italic; color:var(--berry); font-weight:500;}
+.intro-text::first-letter{
+ font-family:'Cormorant Garamond',serif; font-weight:500; font-size:60px;
+ float:left; line-height:.9; padding:8px 12px 0 0; color:var(--berry);
+}
+.intro-quote{
+ padding:16px 18px; background:rgba(48,66,34,.04);
+ border-left:2px solid var(--gold); border-radius:0 3px 3px 0;
+ font-family:'Cormorant Garamond',serif; font-style:italic;
+ font-size:14px; line-height:1.55; color:var(--ink-2); position:relative;
+}
+.intro-quote::before{
+ content:"\201C"; position:absolute; top:-2px; left:6px;
+ font-family:'Cormorant Garamond',serif; font-size:38px; color:var(--gold); line-height:1;
+}
+.intro-quote .attrib{
+ display:block; margin-top:10px; font-style:normal;
+ font-family:'JetBrains Mono',monospace; font-size:9px;
+ letter-spacing:.16em; text-transform:uppercase; color:var(--gold);
+}
+
+/* ===== BODY ===== */
+.body{padding:52px 64px 48px;}
+
+.sect{margin-bottom:48px;}
+.sect:last-child{margin-bottom:0;}
+.sect-h{
+ display:grid; grid-template-columns:72px 1fr; gap:20px; align-items:baseline;
+ margin-bottom:28px; padding-bottom:14px; border-bottom:1px solid var(--rule);
+}
+.sect-mark{
+ font-family:'Cormorant Garamond',serif; font-style:italic; font-size:28px;
+ font-weight:500; color:var(--berry);
+ width:56px; height:56px; border-radius:50%;
+ background:var(--cream); border:1px solid var(--rule);
+ display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+.sect-title{
+ font-family:'Cormorant Garamond',serif; font-weight:500;
+ font-size:32px; letter-spacing:-.01em; color:var(--ink); line-height:1.1;
+}
+.sect-title em{font-style:italic; color:var(--leaf); font-weight:500;}
+.sect-kicker{
+ display:block; font-family:'JetBrains Mono',monospace; font-size:10px;
+ letter-spacing:.22em; text-transform:uppercase; color:var(--muted); margin-top:6px;
+}
+
+/* two-col experience layout */
+.two-col{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+
+.exp-card{
+ background:var(--cream); border:1px solid var(--rule); border-radius:4px;
+ padding:22px 24px; position:relative; display:flex; flex-direction:column; gap:12px;
+}
+.exp-card::before{
+ content:""; position:absolute; left:-1px; top:18px; bottom:18px; width:3px;
+ background:var(--leaf); border-radius:2px;
+}
+.exp-card.berry::before{background:var(--berry);}
+.exp-card.gold::before{background:var(--gold);}
+.exp-card.wide{grid-column:span 2;}
+
+.exp-top{display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;}
+.exp-role{font-family:'Work Sans',sans-serif; font-weight:600; font-size:16px; color:var(--ink); letter-spacing:-.005em;}
+.exp-company{
+ font-family:'Cormorant Garamond',serif; font-style:italic; font-size:16px;
+ color:var(--leaf); font-weight:500; margin-top:3px;
+}
+.exp-meta{
+ font-family:'JetBrains Mono',monospace; font-size:10.5px;
+ color:var(--muted); letter-spacing:.12em; white-space:nowrap; text-align:right; line-height:1.6;
+}
+.exp-meta .loc{display:block; margin-top:3px;}
+.exp-desc{font-size:13.5px; line-height:1.7; color:var(--ink-2); text-wrap:pretty;}
+.exp-desc strong{color:var(--ink); font-weight:600;}
+
+.tag-cloud{display:flex; flex-wrap:wrap; gap:6px; margin-top:4px;}
+.tag-cloud span{
+ font-family:'JetBrains Mono',monospace; font-size:10px;
+ padding:4px 10px; border-radius:20px;
+ background:var(--paper); color:var(--leaf-dark); border:1px solid var(--rule);
+ letter-spacing:.04em; font-weight:500; white-space:nowrap;
+}
+
+/* skills + languages panel */
+.aux-grid{
+ display:grid; grid-template-columns:1.2fr 1fr; gap:20px;
+}
+.aux-card{
+ background:var(--cream); border:1px solid var(--rule); border-radius:4px;
+ padding:24px 26px;
+}
+.aux-card h3{
+ font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.24em;
+ text-transform:uppercase; color:var(--berry); margin-bottom:18px;
+ display:flex; align-items:center; gap:10px; padding-bottom:10px; border-bottom:1px solid var(--rule);
+}
+.aux-card h3 svg{width:13px; height:13px; color:var(--gold);}
+
+.skills-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px 24px;}
+.skill-bloom .skill-name{
+ display:flex; justify-content:space-between; align-items:baseline;
+ font-size:13px; color:var(--ink); font-weight:500; margin-bottom:5px;
+}
+.skill-bloom .skill-name em{
+ font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:400;
+ color:var(--leaf); font-size:12px;
+}
+.skill-bar{height:5px; background:rgba(31,42,29,.08); border-radius:3px; overflow:hidden;}
+.skill-bar-fill{height:100%; background:linear-gradient(90deg, var(--leaf), var(--gold)); border-radius:3px;}
+
+.lang-list{list-style:none;}
+.lang-list li{
+ display:flex; justify-content:space-between; align-items:baseline;
+ padding:10px 0; border-bottom:1px dotted var(--rule);
+ font-size:14px; color:var(--ink);
+}
+.lang-list li:last-child{border-bottom:none;}
+.lang-list li em{
+ font-family:'Cormorant Garamond',serif; font-style:italic;
+ color:var(--leaf); font-size:13px;
+}
+
+/* education grid */
+.edu-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+.edu-card{
+ background:var(--cream); border:1px solid var(--rule); border-radius:4px;
+ padding:22px 24px;
+}
+.edu-card .deg{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:18px; color:var(--ink); line-height:1.2; letter-spacing:-.005em;}
+.edu-card .school{font-size:13.5px; color:var(--leaf); font-weight:500; margin-top:4px; font-style:italic; font-family:'Cormorant Garamond',serif;}
+.edu-card .yr{font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--muted); letter-spacing:.12em; margin-top:8px;}
+.edu-card .notes{font-size:13px; color:var(--ink-2); margin-top:10px; line-height:1.6;}
+
+/* signature */
+.signature{
+ padding:30px 64px 40px; border-top:1px solid var(--rule);
+ text-align:center;
+ background:linear-gradient(to bottom, transparent, rgba(90,122,62,.04));
+}
+.signature .name{
+ font-family:'Cormorant Garamond',serif; font-style:italic;
+ font-size:20px; color:var(--leaf); letter-spacing:.01em;
+}
+.signature svg{width:140px; height:28px; display:block; margin:8px auto 0; color:var(--gold);}
+
+@media(max-width:960px){
+ .mast{grid-template-columns:1fr; gap:24px; padding:44px 32px 36px;}
+ .mast-right{border-left:none; border-top:1px solid var(--rule); padding:22px 0 0;}
+ .intro{grid-template-columns:1fr; gap:20px; padding:36px 32px 32px;}
+ .body{padding:40px 32px 32px;}
+ .sect-h{grid-template-columns:1fr; gap:10px;}
+ .two-col, .aux-grid, .edu-grid{grid-template-columns:1fr;}
+ .exp-card.wide{grid-column:auto;}
+ .skills-grid{grid-template-columns:1fr;}
+ .signature{padding:28px 32px;}
+ .mast-name{font-size:48px;}
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+ <div class="toolbar-left">
+ <div class="toolbar-title">
+ <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+ The Botanic · click any text to edit
+ </div>
+ <span class="toolbar-hint">UmmahWorks / Early Career · career switchers · refresh to reset</span>
+ </div>
+ <button class="toolbar-btn" onclick="printSinglePage()">Print PDF</button>
+</div>
+
+<div class="stage">
+ <div class="resume">
+
+ <!-- ===== MASTHEAD ===== -->
+ <header class="mast">
+
+ <svg class="botany-tl" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="1.2">
+ <path d="M100 20 Q100 100 100 180"/>
+ <path d="M100 50 Q70 45 50 70 Q70 75 100 70" fill="currentColor" stroke="none" opacity=".6"/>
+ <path d="M100 60 Q130 55 150 80 Q130 85 100 80" fill="currentColor" stroke="none" opacity=".6"/>
+ <path d="M100 90 Q65 85 45 110 Q70 115 100 110" fill="currentColor" stroke="none" opacity=".5"/>
+ <path d="M100 100 Q135 95 155 120 Q130 125 100 120" fill="currentColor" stroke="none" opacity=".5"/>
+ <circle cx="100" cy="20" r="4" fill="currentColor"/>
+ </svg>
+
+ <svg class="botany-br" viewBox="0 0 200 200" fill="currentColor">
+ <path d="M20 180 Q60 100 180 60" stroke="currentColor" stroke-width="1" fill="none"/>
+ <ellipse cx="50" cy="160" rx="14" ry="5" transform="rotate(-40 50 160)"/>
+ <ellipse cx="85" cy="130" rx="14" ry="5" transform="rotate(-40 85 130)"/>
+ <ellipse cx="120" cy="100" rx="14" ry="5" transform="rotate(-40 120 100)"/>
+ <ellipse cx="155" cy="75" rx="14" ry="5" transform="rotate(-40 155 75)"/>
+ <circle cx="175" cy="62" r="5"/>
+ </svg>
+
+ <div class="avatar-wrap">
+ <div class="avatar" contenteditable="true">ZT</div>
+ <svg class="avatar-leaves" viewBox="0 0 50 50" fill="currentColor">
+ <path d="M25 5 Q32 18 25 30 Q18 18 25 5 Z" opacity=".75"/>
+ <path d="M10 15 Q22 20 30 32 Q18 28 10 15 Z" opacity=".55"/>
+ <path d="M40 15 Q28 20 20 32 Q32 28 40 15 Z" opacity=".55"/>
+ </svg>
+ </div>
+
+ <div class="mast-center">
+ <div class="mast-kicker">Brooklyn · Open to Junior Product Designer roles</div>
+ <h1 class="mast-name"><span contenteditable="true">Zainab</span> <em contenteditable="true">Tahir.</em></h1>
+ <div class="mast-role" contenteditable="true">Former architect, designing for people now.</div>
+ </div>
+
+ <div class="mast-right">
+ <div class="mast-right-label">Contact</div>
+ <div class="contact-row">
+ <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+ <span contenteditable="true">zainab.tahir@gmail.com</span>
+ </div>
+ <div class="contact-row">
+ <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+ <span contenteditable="true">+1 555 000 0000</span>
+ </div>
+ <div class="contact-row">
+ <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><circle cx="12" cy="11" r="3"/></svg>
+ <span contenteditable="true">Brooklyn, NY</span>
+ </div>
+ <div class="contact-row">
+ <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+ <span contenteditable="true">zainabtahir.design</span>
+ </div>
+ </div>
+ </header>
+
+ <!-- ===== INTRO STRIP ===== -->
+ <div class="intro">
+ <div class="intro-label">On the record<small>Summary</small></div>
+ <p class="intro-text" contenteditable="true">After four years designing buildings, I realized I wanted to design the quieter, warmer objects people use every day. I completed a design bootcamp, shipped two live projects, and now I am looking for the team that will <em>invest in the next chapter.</em></p>
+ <div class="intro-quote">
+ <span contenteditable="true">A career switch is not a restart, it is a transplant. The roots travel with you.</span>
+ <span class="attrib" contenteditable="true">, mentor, UmmahWorks</span>
+ </div>
+ </div>
+
+ <!-- ===== BODY ===== -->
+ <div class="body">
+
+ <!-- EXPERIENCE -->
+ <section class="sect">
+ <div class="sect-h">
+ <span class="sect-mark">I</span>
+ <div>
+ <h2 class="sect-title"><em>Experience,</em> past and present.</h2>
+ <span class="sect-kicker">Three roles · six years · still learning</span>
+ </div>
+ </div>
+
+ <div class="two-col">
+ <article class="exp-card berry wide">
+ <div class="exp-top">
+ <div>
+ <div class="exp-role" contenteditable="true">Product Design Intern</div>
+ <div class="exp-company" contenteditable="true">Orchard, an early stage fintech</div>
+ </div>
+ <div class="exp-meta">
+ <span contenteditable="true">Jun 2025, Sep 2025</span>
+ <span class="loc" contenteditable="true">New York · remote</span>
+ </div>
+ </div>
+ <p class="exp-desc" contenteditable="true">Shipped the first version of the onboarding flow used by <strong>8,000 beta users.</strong> Ran five user interviews and translated findings into the final design. Collaborated closely with two engineers end to end.</p>
+ <div class="tag-cloud">
+ <span contenteditable="true">Figma</span>
+ <span contenteditable="true">Onboarding</span>
+ <span contenteditable="true">User Research</span>
+ <span contenteditable="true">Design System</span>
+ </div>
+ </article>
+
+ <article class="exp-card">
+ <div class="exp-top">
+ <div>
+ <div class="exp-role" contenteditable="true">Junior Architect</div>
+ <div class="exp-company" contenteditable="true">Al Madinah Design Studio</div>
+ </div>
+ <div class="exp-meta">
+ <span contenteditable="true">2021, 2024</span>
+ <span class="loc" contenteditable="true">Brooklyn, NY</span>
+ </div>
+ </div>
+ <p class="exp-desc" contenteditable="true">Led design of <strong>three community spaces</strong> including a masjid expansion and a youth center. Translated client interviews into design briefs and managed a design process from concept to construction drawings.</p>
+ <div class="tag-cloud">
+ <span contenteditable="true">AutoCAD</span>
+ <span contenteditable="true">Client Interviews</span>
+ <span contenteditable="true">Systems Thinking</span>
+ </div>
+ </article>
+
+ <article class="exp-card gold">
+ <div class="exp-top">
+ <div>
+ <div class="exp-role" contenteditable="true">Freelance Designer</div>
+ <div class="exp-company" contenteditable="true">Selected clients and volunteer work</div>
+ </div>
+ <div class="exp-meta">
+ <span contenteditable="true">2022, Now</span>
+ <span class="loc" contenteditable="true">Remote</span>
+ </div>
+ </div>
+ <p class="exp-desc" contenteditable="true">Branding and marketing sites for three Muslim owned small businesses. Donated work to the Brooklyn Masjid volunteer site. Comfortable with client scoping, deliverables, and invoicing.</p>
+ </article>
+ </div>
+ </section>
+
+ <!-- SKILLS + LANGUAGES -->
+ <section class="sect">
+ <div class="sect-h">
+ <span class="sect-mark">II</span>
+ <div>
+ <h2 class="sect-title"><em>Skills</em> in bloom, and languages.</h2>
+ <span class="sect-kicker">Honest levels · no five stars</span>
+ </div>
+ </div>
+
+ <div class="aux-grid">
+ <div class="aux-card">
+ <h3>
+ <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118L2.05 10.1c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+ Skills in bloom
+ </h3>
+ <div class="skills-grid">
+ <div class="skill-bloom">
+ <div class="skill-name"><span contenteditable="true">Figma</span><em contenteditable="true">fluent</em></div>
+ <div class="skill-bar"><div class="skill-bar-fill" style="width:92%"></div></div>
+ </div>
+ <div class="skill-bloom">
+ <div class="skill-name"><span contenteditable="true">Visual Design</span><em contenteditable="true">strong</em></div>
+ <div class="skill-bar"><div class="skill-bar-fill" style="width:85%"></div></div>
+ </div>
+ <div class="skill-bloom">
+ <div class="skill-name"><span contenteditable="true">Prototyping</span><em contenteditable="true">strong</em></div>
+ <div class="skill-bar"><div class="skill-bar-fill" style="width:80%"></div></div>
+ </div>
+ <div class="skill-bloom">
+ <div class="skill-name"><span contenteditable="true">User Research</span><em contenteditable="true">growing</em></div>
+ <div class="skill-bar"><div class="skill-bar-fill" style="width:68%"></div></div>
+ </div>
+ <div class="skill-bloom">
+ <div class="skill-name"><span contenteditable="true">HTML &amp; CSS</span><em contenteditable="true">working</em></div>
+ <div class="skill-bar"><div class="skill-bar-fill" style="width:55%"></div></div>
+ </div>
+ <div class="skill-bloom">
+ <div class="skill-name"><span contenteditable="true">Design Systems</span><em contenteditable="true">growing</em></div>
+ <div class="skill-bar"><div class="skill-bar-fill" style="width:60%"></div></div>
+ </div>
+ </div>
+ </div>
+
+ <div class="aux-card">
+ <h3>
+ <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10 7v6m-3-3h6"/></svg>
+ Languages
+ </h3>
+ <ul class="lang-list">
+ <li><span contenteditable="true">English</span><em contenteditable="true">native</em></li>
+ <li><span contenteditable="true">Arabic</span><em contenteditable="true">fluent</em></li>
+ <li><span contenteditable="true">Spanish</span><em contenteditable="true">conversational</em></li>
+ <li><span contenteditable="true">Urdu</span><em contenteditable="true">working</em></li>
+ </ul>
+ </div>
+ </div>
+ </section>
+
+ <!-- EDUCATION -->
+ <section class="sect">
+ <div class="sect-h">
+ <span class="sect-mark">III</span>
+ <div>
+ <h2 class="sect-title"><em>Study,</em> formal and self taught.</h2>
+ <span class="sect-kicker">Two programs · a thesis and a portfolio</span>
+ </div>
+ </div>
+
+ <div class="edu-grid">
+ <div class="edu-card">
+ <div class="deg" contenteditable="true">Product Design Intensive</div>
+ <div class="school" contenteditable="true">Designlab, UX Academy</div>
+ <div class="yr" contenteditable="true">2024, 2025</div>
+ <div class="notes" contenteditable="true">Six month full time program. Portfolio with three shipped case studies.</div>
+ </div>
+ <div class="edu-card">
+ <div class="deg" contenteditable="true">B.Arch Architecture</div>
+ <div class="school" contenteditable="true">Pratt Institute</div>
+ <div class="yr" contenteditable="true">2017, 2021</div>
+ <div class="notes" contenteditable="true">Thesis on sacred public space. Dean's list, four semesters.</div>
+ </div>
+ </div>
+ </section>
+
+ <!-- COMMUNITY -->
+ <section class="sect">
+ <div class="sect-h">
+ <span class="sect-mark">IV</span>
+ <div>
+ <h2 class="sect-title"><em>Community.</em></h2>
+ <span class="sect-kicker">Where I spend volunteer hours</span>
+ </div>
+ </div>
+
+ <article class="exp-card">
+ <div class="exp-top">
+ <div>
+ <div class="exp-role" contenteditable="true">UmmahWorks Mentee, Design Track</div>
+ <div class="exp-company" contenteditable="true">Supported into design through a senior mentor</div>
+ </div>
+ <div class="exp-meta"><span contenteditable="true">2024, Now</span></div>
+ </div>
+ <p class="exp-desc" contenteditable="true">Weekly sessions on portfolio, interview prep, and negotiation. Now giving back by peer reviewing the next cohort.</p>
+ </article>
+ </section>
+
+ </div>
+
+ <!-- SIGNATURE -->
+ <div class="signature">
+ <span class="name" contenteditable="true">Zainab Tahir</span>
+ <svg viewBox="0 0 140 28" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round">
+ <path d="M2 14 Q24 2 48 14 T96 14 T138 14"/>
+ <circle cx="2" cy="14" r="1.8" fill="currentColor"/>
+ <circle cx="138" cy="14" r="1.8" fill="currentColor"/>
+ </svg>
+ </div>
+
+ </div>
+</div>
+
+<script>
+function printSinglePage(){
+  var r=document.querySelector('.resume');
+  var s=document.querySelector('#print-css')||document.createElement('style');
+  s.id='print-css';
+  document.head.appendChild(s);
+  var W=r.scrollWidth,H=r.scrollHeight;
+  var scale=816/W;
+  var scaledH=Math.ceil(H*scale);var pageH=scaledH/96;
+  s.textContent=
+    '@page{size:8.5in '+pageH.toFixed(4)+'in;margin:0;}'+
+    '@media print{'+
+      '.toolbar{display:none!important;}'+
+      'html,body{background:white!important;min-height:0!important;margin:0!important;padding:0!important;height:'+scaledH+'px!important;overflow:hidden!important;}'+
+      '.stage{padding:0!important;margin:0!important;max-width:none!important;width:'+W+'px!important;zoom:'+scale.toFixed(4)+';}'+
+      '.resume{box-shadow:none!important;border-radius:0!important;}'+
+      '.mast{grid-template-columns:180px 1fr 320px!important;gap:44px!important;padding:64px 64px 48px!important;}'+
+      '.intro{grid-template-columns:180px 1fr 200px!important;gap:44px!important;padding:46px 64px 40px!important;}'+
+      '.body{padding:52px 64px 48px!important;}'+
+      '.two-col,.aux-grid,.edu-grid{grid-template-columns:1fr 1fr!important;}'+
+      '.skills-grid{grid-template-columns:1fr 1fr!important;}'+
+      '.exp-card.wide{grid-column:span 2!important;}'+
+      '.sect-h{grid-template-columns:72px 1fr!important;}'+
+      '.mast-name{font-size:clamp(64px,8vw,96px)!important;}'+
+    '}';
+  _showPrintTip();
+}
+function _showPrintTip(){
+  if(!document.getElementById('print-tip-css')){var cs=document.createElement('style');cs.id='print-tip-css';cs.textContent='@media print{#print-tip{display:none!important;}}';document.head.appendChild(cs);}
+  var t=document.getElementById('print-tip');
+  if(!t){
+    t=document.createElement('div');
+    t.id='print-tip';
+    t.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:99999;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif;';
+    t.innerHTML='<div style="background:#fff;padding:36px 40px;max-width:420px;width:90%;border-radius:3px;text-align:center;"><div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#888;margin-bottom:14px;">Before you print</div><div style="font-size:20px;font-weight:700;color:#111;margin-bottom:10px;">Enable Background Graphics</div><div style="font-size:14px;line-height:1.65;color:#555;margin-bottom:28px;">In the print dialog, turn on <strong style="color:#111;">Background graphics</strong> (Chrome / Edge) or <strong style="color:#111;">Background colors &amp; images</strong> (Safari / Firefox) so colors and styling render correctly.</div><button onclick="document.getElementById(\'print-tip\').style.display=\'none\';window.print();" style="padding:12px 32px;background:#111;color:#fff;border:none;border-radius:2px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">Print PDF</button></div>';
+    document.body.appendChild(t);
+  }
+  t.style.display='flex';
+}
+</script>
+
+
+</body>
+</html>

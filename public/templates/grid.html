@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Samir Oussama — Staff Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --white:#fff;
+  --off:#f8f8f6;
+  --ink:#0a0a0a;
+  --ink-2:#1e1e1e;
+  --muted:#6b6b6b;
+  --rule:#d8d8d5;
+  --red:#d81e1e;
+}
+html,body{background:var(--off);color:var(--ink);font-family:'Space Grotesk',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;}
+
+.toolbar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:12px 24px;background:var(--ink);color:#fff;gap:16px;}
+.toolbar-title{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;}
+.toolbar-hint{font-family:'Space Mono',monospace;font-size:10px;color:rgba(255,255,255,.4);letter-spacing:.1em;}
+.toolbar-left{display:flex;flex-direction:column;gap:3px;}
+.toolbar-btn{padding:8px 16px;background:var(--red);color:#fff;border:none;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;white-space:nowrap;}
+.toolbar-btn:hover{background:#b81818;}
+
+[contenteditable]{outline:none;cursor:text;transition:background .12s;}
+[contenteditable]:hover{background-color:rgba(216,30,30,.08)!important;outline:1px dashed rgba(216,30,30,.4);}
+[contenteditable]:focus{background-color:rgba(216,30,30,.12)!important;outline:2px solid var(--red);}
+
+.stage{max-width:1280px;margin:0 auto;padding:28px 28px 80px;}
+.resume{background:var(--white);box-shadow:0 60px 120px -40px rgba(10,10,10,.2),0 0 0 1px rgba(10,10,10,.06);}
+
+/* SWISS GRID HEADER */
+.header{display:grid;grid-template-columns:1fr 1fr;gap:0;border-bottom:3px solid var(--ink);}
+.header-left{padding:56px 52px 44px;background:var(--ink);color:#fff;position:relative;}
+.header-left::after{content:"";position:absolute;top:0;right:0;width:4px;height:100%;background:var(--red);}
+.header-right{padding:56px 52px 44px;display:flex;flex-direction:column;justify-content:space-between;}
+
+.h-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:20px;}
+.name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(52px,6vw,78px);line-height:.94;letter-spacing:-.03em;color:#fff;margin-bottom:12px;}
+.name .red{color:var(--red);}
+.title{font-family:'Space Mono',monospace;font-size:14px;color:rgba(255,255,255,.65);letter-spacing:.04em;border-top:1px solid rgba(255,255,255,.2);padding-top:14px;}
+
+.h-right-top{}
+.h-right-label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
+.summary{font-family:'Space Grotesk',sans-serif;font-size:15.5px;line-height:1.6;color:var(--ink-2);font-weight:400;text-wrap:pretty;}
+
+.h-contacts{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--rule);}
+.contact-cell{padding:12px 0;border-right:1px solid var(--rule);padding-right:20px;}
+.contact-cell:nth-child(2){border-right:none;padding-right:0;padding-left:20px;}
+.contact-cell .k{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:4px;display:block;}
+.contact-cell .v{font-size:13px;color:var(--ink);font-weight:500;}
+
+/* STATS ROW */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--ink);}
+.stat{padding:24px 28px;border-right:1px solid var(--rule);}
+.stat:last-child{border-right:none;}
+.stat-bar{height:3px;background:var(--rule);margin-bottom:14px;position:relative;}
+.stat-bar::after{content:"";position:absolute;left:0;top:0;height:100%;background:var(--red);width:var(--w,100%);}
+.stat-n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:40px;letter-spacing:-.04em;line-height:1;color:var(--ink);margin-bottom:6px;}
+.stat-l{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);line-height:1.55;}
+
+/* BODY */
+.body{display:grid;grid-template-columns:1fr 260px;gap:0;}
+.main{padding:44px 52px;border-right:1px solid var(--rule);}
+.sidebar{padding:36px 36px;}
+
+/* SECTION */
+.sect{margin-bottom:40px;}
+.sect:last-child{margin-bottom:0;}
+.sect-h{display:flex;align-items:center;gap:0;margin-bottom:20px;}
+.sect-h .box{width:10px;height:10px;background:var(--red);margin-right:14px;flex-shrink:0;}
+.sect-h .label{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink);font-weight:700;}
+.sect-h::after{content:"";flex:1;height:2px;background:var(--ink);margin-left:14px;}
+
+/* EXP */
+.exp-item{display:grid;grid-template-columns:3px 1fr;gap:22px;padding:16px 0;border-bottom:1px solid var(--rule);}
+.exp-item:last-child{border-bottom:none;}
+.exp-stripe{background:var(--rule);border-radius:2px;margin:2px 0;}
+.exp-stripe.active{background:var(--red);}
+.exp-content{}
+.exp-top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:nowrap;margin-bottom:3px;}
+.exp-role{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;letter-spacing:-.01em;color:var(--ink);}
+.exp-date{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;color:var(--muted);white-space:nowrap;}
+.exp-co{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--red);margin-bottom:12px;font-weight:400;}
+.bullets{list-style:none;padding:0;display:flex;flex-direction:column;gap:6px;}
+.bullets li{font-size:13.5px;line-height:1.65;color:var(--ink-2);padding-left:18px;position:relative;text-wrap:pretty;}
+.bullets li::before{content:"";position:absolute;left:0;top:10px;width:8px;height:2px;background:var(--red);}
+
+/* SIDEBAR */
+.side-block{margin-bottom:26px;padding-bottom:22px;border-bottom:1px solid var(--rule);}
+.side-block:last-child{border-bottom:none;padding-bottom:0;margin-bottom:0;}
+.side-h{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+.side-h .box{width:7px;height:7px;background:var(--red);}
+.side-h .l{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);font-weight:700;}
+
+.skill-item{padding:7px 0;border-bottom:1px dotted var(--rule);display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13.5px;}
+.skill-item:last-child{border-bottom:none;}
+.skill-name{font-weight:500;color:var(--ink);}
+.skill-tag{font-family:'Space Mono',monospace;font-size:9.5px;letter-spacing:.1em;color:var(--muted);white-space:nowrap;}
+
+.tag-cloud{display:flex;flex-wrap:wrap;gap:5px;}
+.tag{font-family:'Space Mono',monospace;font-size:9.5px;padding:3px 8px;border:1px solid var(--rule);color:var(--ink-2);letter-spacing:.06em;}
+
+.edu-item{padding:9px 0;border-bottom:1px dotted var(--rule);}
+.edu-item:last-child{border-bottom:none;}
+.edu-deg{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:13.5px;color:var(--ink);}
+.edu-school{font-size:12px;color:var(--muted);margin-top:2px;}
+.edu-yr{font-family:'Space Mono',monospace;font-size:10px;color:var(--red);margin-top:4px;letter-spacing:.1em;}
+
+/* FOOT */
+.foot{padding:18px 52px;background:var(--ink);display:flex;justify-content:space-between;align-items:center;}
+.foot-l{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+.foot-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:14px;letter-spacing:.02em;color:#fff;}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="toolbar-left">
+    <div class="toolbar-title">The Grid, click any text to edit</div>
+    <span class="toolbar-hint">UmmahWorks / Engineers, all levels / Refresh to reset</span>
+  </div>
+  <button class="toolbar-btn" onclick="printSinglePage()">Print PDF</button>
+</div>
+<div class="stage">
+<div class="resume">
+
+<div class="header">
+  <div class="header-left">
+    <div class="h-label">Staff Engineer</div>
+    <h1 class="name"><span contenteditable="true">Samir</span><br><span class="red" contenteditable="true">Oussama</span></h1>
+    <div class="title" contenteditable="true">Backend Infrastructure, Distributed Systems</div>
+  </div>
+  <div class="header-right">
+    <div class="h-right-top">
+      <div class="h-right-label">Summary</div>
+      <p class="summary" contenteditable="true">Nine years in backend engineering, the last three at staff level. I work best on hard infrastructure problems with real business stakes. Comfortable owning architecture across team boundaries and mentoring engineers who are ready to move up.</p>
+    </div>
+    <div class="h-contacts">
+      <div class="contact-cell"><span class="k">Email</span><span class="v" contenteditable="true">samir.oussama@gmail.com</span></div>
+      <div class="contact-cell"><span class="k">Phone</span><span class="v" contenteditable="true">+1 555 000 0000</span></div>
+      <div class="contact-cell"><span class="k">City</span><span class="v" contenteditable="true">Austin, TX</span></div>
+      <div class="contact-cell"><span class="k">GitHub</span><span class="v" contenteditable="true">github.com/samiroussama</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat">
+    <div class="stat-bar" style="--w:90%"></div>
+    <div class="stat-n" contenteditable="true">99.99%</div>
+    <div class="stat-l" contenteditable="true">Uptime on core payment processing service</div>
+  </div>
+  <div class="stat">
+    <div class="stat-bar" style="--w:75%"></div>
+    <div class="stat-n" contenteditable="true">$5M</div>
+    <div class="stat-l" contenteditable="true">Infrastructure cost saved through two replatform projects</div>
+  </div>
+  <div class="stat">
+    <div class="stat-bar" style="--w:60%"></div>
+    <div class="stat-n" contenteditable="true">3x</div>
+    <div class="stat-l" contenteditable="true">Throughput improvement on rewritten ingestion pipeline</div>
+  </div>
+  <div class="stat">
+    <div class="stat-bar" style="--w:45%"></div>
+    <div class="stat-n" contenteditable="true">6</div>
+    <div class="stat-l" contenteditable="true">Senior engineers promoted with my direct sponsorship</div>
+  </div>
+</div>
+
+<div class="body">
+  <main class="main">
+    <section class="sect">
+      <div class="sect-h"><span class="box"></span><span class="label">Experience</span></div>
+
+      <div class="exp-item">
+        <div class="exp-stripe active"></div>
+        <div class="exp-content">
+          <div class="exp-top"><span class="exp-role" contenteditable="true">Staff Software Engineer</span><span class="exp-date" contenteditable="true">2021, Now</span></div>
+          <div class="exp-co" contenteditable="true">CORAL SYSTEMS, Austin TX</div>
+          <ul class="bullets">
+            <li contenteditable="true">Redesigned the payment processing service to handle 5x peak load, eliminating all capacity-related incidents over the following 18 months. Service now handles $2B in annual transaction volume at 99.99% uptime.</li>
+            <li contenteditable="true">Led a cross-team replatform from a self-managed Kafka cluster to a managed service, cutting ops overhead by 60% and saving $2.4M annually.</li>
+            <li contenteditable="true">Defined the technical roadmap for the data infrastructure team across three quarters, aligning four engineering teams on a shared migration plan.</li>
+            <li contenteditable="true">Mentored six senior engineers toward staff promotion; all six completed the process within 18 months of starting structured sponsorship.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-stripe active"></div>
+        <div class="exp-content">
+          <div class="exp-top"><span class="exp-role" contenteditable="true">Senior Software Engineer</span><span class="exp-date" contenteditable="true">2018, 2021</span></div>
+          <div class="exp-co" contenteditable="true">PULSAR TECH, San Francisco CA</div>
+          <ul class="bullets">
+            <li contenteditable="true">Built the real-time data ingestion pipeline from scratch in Go, processing 8M events per day at sub-50ms P99. Used in production by two separate product lines.</li>
+            <li contenteditable="true">Rewrote the search indexing service, achieving 3x throughput improvement and halving memory usage on the same hardware budget.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-stripe"></div>
+        <div class="exp-content">
+          <div class="exp-top"><span class="exp-role" contenteditable="true">Software Engineer</span><span class="exp-date" contenteditable="true">2016, 2018</span></div>
+          <div class="exp-co" contenteditable="true">WAVEFRONT, Remote</div>
+          <ul class="bullets">
+            <li contenteditable="true">Backend engineer on the API team; owned two public API endpoints from spec through GA and maintained them through 10x traffic growth.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="sect">
+      <div class="sect-h"><span class="box"></span><span class="label">Community</span></div>
+      <div class="exp-item" style="padding-top:4px;">
+        <div class="exp-stripe active"></div>
+        <div class="exp-content">
+          <div class="exp-top"><span class="exp-role" contenteditable="true">Mentor, UmmahWorks</span><span class="exp-date" contenteditable="true">2024, Now</span></div>
+          <div class="exp-co" contenteditable="true">Volunteer, Engineering Track</div>
+          <ul class="bullets">
+            <li contenteditable="true">One-on-one sessions with Muslim engineers on staff promotion, technical interviews, and system design practice.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="sidebar">
+    <div class="side-block">
+      <div class="side-h"><span class="box"></span><span class="l">Languages</span></div>
+      <div class="skill-item"><span class="skill-name" contenteditable="true">Go</span><span class="skill-tag">Expert</span></div>
+      <div class="skill-item"><span class="skill-name" contenteditable="true">Python</span><span class="skill-tag">Strong</span></div>
+      <div class="skill-item"><span class="skill-name" contenteditable="true">Rust</span><span class="skill-tag">Working</span></div>
+      <div class="skill-item"><span class="skill-name" contenteditable="true">Java</span><span class="skill-tag">Proficient</span></div>
+    </div>
+
+    <div class="side-block">
+      <div class="side-h"><span class="box"></span><span class="l">Systems</span></div>
+      <div class="tag-cloud">
+        <span class="tag" contenteditable="true">Kafka</span>
+        <span class="tag" contenteditable="true">Postgres</span>
+        <span class="tag" contenteditable="true">Redis</span>
+        <span class="tag" contenteditable="true">Cassandra</span>
+        <span class="tag" contenteditable="true">gRPC</span>
+        <span class="tag" contenteditable="true">GraphQL</span>
+      </div>
+    </div>
+
+    <div class="side-block">
+      <div class="side-h"><span class="box"></span><span class="l">Infrastructure</span></div>
+      <div class="tag-cloud">
+        <span class="tag" contenteditable="true">Kubernetes</span>
+        <span class="tag" contenteditable="true">Terraform</span>
+        <span class="tag" contenteditable="true">AWS</span>
+        <span class="tag" contenteditable="true">GCP</span>
+        <span class="tag" contenteditable="true">Docker</span>
+        <span class="tag" contenteditable="true">Datadog</span>
+      </div>
+    </div>
+
+    <div class="side-block">
+      <div class="side-h"><span class="box"></span><span class="l">Education</span></div>
+      <div class="edu-item">
+        <div class="edu-deg" contenteditable="true">B.S. Computer Science</div>
+        <div class="edu-school" contenteditable="true">UT Austin, GPA 3.87</div>
+        <div class="edu-yr" contenteditable="true">2016</div>
+      </div>
+    </div>
+
+    <div class="side-block">
+      <div class="side-h"><span class="box"></span><span class="l">Human Languages</span></div>
+      <div class="skill-item"><span contenteditable="true">English</span><span class="skill-tag">Native</span></div>
+      <div class="skill-item"><span contenteditable="true">Arabic</span><span class="skill-tag">Fluent</span></div>
+      <div class="skill-item"><span contenteditable="true">French</span><span class="skill-tag">Conversational</span></div>
+    </div>
+  </aside>
+</div>
+
+<footer class="foot">
+  <span class="foot-l">References on request</span>
+  <span class="foot-name" contenteditable="true">Samir Oussama</span>
+  <span class="foot-l" contenteditable="true">Austin, TX</span>
+</footer>
+</div>
+</div>
+<script>
+function printSinglePage(){
+  var r=document.querySelector('.resume');
+  var s=document.querySelector('#print-css')||document.createElement('style');
+  s.id='print-css';
+  document.head.appendChild(s);
+  var W=r.offsetWidth,H=r.offsetHeight;
+  var scale=816/W;
+  var scaledH=Math.ceil(H*scale);var pageH=scaledH/96;
+  s.textContent=
+    '@page{size:8.5in '+pageH.toFixed(4)+'in;margin:0;}'+
+    '@media print{'+
+      '.toolbar{display:none!important;}'+
+      'html,body{background:white!important;min-height:0!important;margin:0!important;padding:0!important;height:'+scaledH+'px!important;overflow:hidden!important;}'+
+      '.stage{padding:0!important;margin:0!important;max-width:none!important;width:'+W+'px!important;zoom:'+scale.toFixed(4)+';}'+
+      '.resume{box-shadow:none!important;border-radius:0!important;}'+
+      '.name{font-size:78px!important;}'+
+    '}';
+  _showPrintTip();
+}
+function _showPrintTip(){
+  if(!document.getElementById('print-tip-css')){var cs=document.createElement('style');cs.id='print-tip-css';cs.textContent='@media print{#print-tip{display:none!important;}}';document.head.appendChild(cs);}
+  var t=document.getElementById('print-tip');
+  if(!t){
+    t=document.createElement('div');
+    t.id='print-tip';
+    t.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:99999;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif;';
+    t.innerHTML='<div style="background:#fff;padding:36px 40px;max-width:420px;width:90%;border-radius:3px;text-align:center;"><div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#888;margin-bottom:14px;">Before you print</div><div style="font-size:20px;font-weight:700;color:#111;margin-bottom:10px;">Enable Background Graphics</div><div style="font-size:14px;line-height:1.65;color:#555;margin-bottom:28px;">In the print dialog, turn on <strong style="color:#111;">Background graphics</strong> (Chrome / Edge) or <strong style="color:#111;">Background colors &amp; images</strong> (Safari / Firefox) so colors and styling render correctly.</div><button onclick="document.getElementById(\'print-tip\').style.display=\'none\';window.print();" style="padding:12px 32px;background:#111;color:#fff;border:none;border-radius:2px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">Print PDF</button></div>';
+    document.body.appendChild(t);
+  }
+  t.style.display='flex';
+}
+</script>
+
+
+</body>
+</html>

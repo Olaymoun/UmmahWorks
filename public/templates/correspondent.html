@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Layla Benali — Senior Communications Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Lato:wght@300;400;700;900&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#faf7f2;
+  --paper:#f2ede3;
+  --ink:#181714;
+  --ink-2:#302e29;
+  --muted:#766f62;
+  --rule:#c8c0aa;
+  --accent:#1a5c8a;
+  --accent-warm:#b85c2a;
+}
+html,body{background:var(--paper);color:var(--ink);font-family:'Lato',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;}
+
+.toolbar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:12px 24px;background:var(--ink);color:var(--cream);gap:16px;}
+.toolbar-title{font-family:'Courier Prime',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;}
+.toolbar-hint{font-family:'Courier Prime',monospace;font-size:10px;color:rgba(250,247,242,.4);letter-spacing:.1em;}
+.toolbar-left{display:flex;flex-direction:column;gap:3px;}
+.toolbar-btn{padding:8px 16px;background:var(--accent);color:#fff;border:none;font-family:'Lato',sans-serif;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;white-space:nowrap;}
+.toolbar-btn:hover{background:#144873;}
+
+[contenteditable]{outline:none;cursor:text;transition:background .12s;}
+[contenteditable]:hover{background-color:rgba(26,92,138,.09)!important;outline:1px dashed rgba(26,92,138,.4);}
+[contenteditable]:focus{background-color:rgba(26,92,138,.13)!important;outline:2px solid var(--accent);}
+
+.stage{max-width:1200px;margin:0 auto;padding:28px 28px 80px;}
+.resume{background:var(--cream);box-shadow:0 60px 120px -40px rgba(24,23,20,.26),0 0 0 1px rgba(24,23,20,.07);}
+
+/* HEADER */
+.header{padding:60px 64px 48px;border-bottom:3px solid var(--ink);position:relative;}
+.header::before{content:"";position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--accent) 0 55%,var(--accent-warm) 55% 100%);}
+
+.header-top{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:start;margin-bottom:28px;}
+.header-kicker{font-family:'Courier Prime',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.header-kicker::before{content:"";width:22px;height:1px;background:var(--accent);}
+.name{font-family:'Lora',serif;font-weight:700;font-size:clamp(48px,6vw,74px);line-height:.96;letter-spacing:-.02em;color:var(--ink);margin-bottom:10px;}
+.role{font-family:'Lora',serif;font-style:italic;font-size:20px;color:var(--accent);letter-spacing:.01em;}
+
+.header-contact{display:flex;flex-direction:column;gap:8px;text-align:right;padding-top:4px;min-width:220px;}
+.contact-row{font-size:12.5px;color:var(--ink-2);display:flex;align-items:center;justify-content:flex-end;gap:8px;}
+.contact-row .k{font-family:'Courier Prime',monospace;font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
+
+.header-summary{display:grid;grid-template-columns:1fr 1fr;gap:40px;}
+.sum-left{font-family:'Lora',serif;font-size:15.5px;line-height:1.7;color:var(--ink);font-style:italic;font-weight:400;text-wrap:pretty;}
+.sum-right{display:flex;flex-direction:column;gap:0;}
+.sum-stat{display:grid;grid-template-columns:80px 1fr;gap:16px;padding:10px 0;border-bottom:1px dotted var(--rule);align-items:baseline;}
+.sum-stat:last-child{border-bottom:none;}
+.sum-n{font-family:'Lora',serif;font-weight:700;font-size:22px;letter-spacing:-.01em;color:var(--accent);line-height:1;}
+.sum-l{font-size:12.5px;line-height:1.5;color:var(--muted);}
+
+/* BODY */
+.body{display:grid;grid-template-columns:1fr 240px;gap:0;border-top:1px solid var(--rule);}
+.main{padding:48px 52px;border-right:1px solid var(--rule);}
+.sidebar{padding:40px 40px;}
+
+/* SECTION */
+.sect{margin-bottom:44px;}
+.sect:last-child{margin-bottom:0;}
+.sect-h{margin-bottom:18px;display:flex;align-items:baseline;gap:14px;}
+.sect-h .num{font-family:'Courier Prime',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);}
+.sect-h .title{font-family:'Lora',serif;font-weight:700;font-size:18px;letter-spacing:-.01em;color:var(--ink);}
+.sect-h::after{content:"";flex:1;height:1px;background:var(--rule);margin-left:10px;}
+
+/* EXP as editorial entries */
+.exp-item{padding:16px 0;border-bottom:1px solid var(--rule);}
+.exp-item:last-child{border-bottom:none;}
+.exp-header{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:baseline;margin-bottom:3px;flex-wrap:nowrap;}
+.exp-role{font-family:'Lora',serif;font-weight:600;font-size:16.5px;letter-spacing:-.01em;color:var(--ink);line-height:1.2;}
+.exp-date{font-family:'Courier Prime',monospace;font-size:10px;letter-spacing:.12em;color:var(--muted);white-space:nowrap;}
+.exp-co{font-family:'Lora',serif;font-style:italic;font-size:13.5px;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.exp-co .loc{font-style:normal;font-family:'Lato',sans-serif;font-size:11px;color:var(--muted);font-weight:400;letter-spacing:.04em;}
+.exp-body{display:flex;flex-direction:column;gap:6px;}
+.exp-body p{font-family:'Lato',sans-serif;font-size:13.5px;line-height:1.68;color:var(--ink-2);text-wrap:pretty;}
+.exp-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px;}
+.tag{font-family:'Courier Prime',monospace;font-size:10px;padding:3px 9px;border:1px solid var(--rule);color:var(--muted);letter-spacing:.06em;}
+
+/* SIDEBAR */
+.side-block{margin-bottom:26px;padding-bottom:22px;border-bottom:1px solid var(--rule);}
+.side-block:last-child{border-bottom:none;padding-bottom:0;margin-bottom:0;}
+.side-h{font-family:'Lora',serif;font-weight:700;font-size:13px;color:var(--ink);margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--ink);}
+
+.skill-row{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;border-bottom:1px dotted var(--rule);font-size:13px;gap:10px;}
+.skill-row:last-child{border-bottom:none;}
+.skill-name{color:var(--ink);}
+.skill-lvl{font-family:'Courier Prime',monospace;font-size:10px;letter-spacing:.1em;color:var(--muted);white-space:nowrap;}
+
+.edu-item{padding:10px 0;border-bottom:1px dotted var(--rule);}
+.edu-item:last-child{border-bottom:none;}
+.edu-deg{font-family:'Lora',serif;font-weight:600;font-size:13.5px;color:var(--ink);}
+.edu-school{font-size:12px;color:var(--muted);margin-top:2px;}
+.edu-yr{font-family:'Courier Prime',monospace;font-size:10px;color:var(--accent);margin-top:4px;letter-spacing:.1em;}
+
+.award-item{padding:8px 0;border-bottom:1px dotted var(--rule);font-size:13px;color:var(--ink-2);}
+.award-item:last-child{border-bottom:none;}
+.award-name{font-weight:700;color:var(--ink);font-size:13.5px;margin-bottom:2px;}
+
+/* FOOT */
+.foot{padding:22px 64px;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;}
+.foot-l{font-family:'Courier Prime',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
+.foot-name{font-family:'Lora',serif;font-style:italic;font-size:17px;color:var(--accent);}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="toolbar-left">
+    <div class="toolbar-title">The Correspondent, click any text to edit</div>
+    <span class="toolbar-hint">UmmahWorks / Marketing, Comms, Content, Writing / Refresh to reset</span>
+  </div>
+  <button class="toolbar-btn" onclick="printSinglePage()">Print PDF</button>
+</div>
+<div class="stage">
+<div class="resume">
+
+<header class="header">
+  <div class="header-top">
+    <div>
+      <div class="header-kicker">Senior Communications Manager</div>
+      <h1 class="name" contenteditable="true">Layla Benali</h1>
+      <div class="role" contenteditable="true">Communications, Content Strategy, Brand Narrative</div>
+    </div>
+    <div class="header-contact">
+      <div class="contact-row"><span class="k">Email</span><span contenteditable="true">layla.benali@gmail.com</span></div>
+      <div class="contact-row"><span class="k">Phone</span><span contenteditable="true">+1 555 000 0000</span></div>
+      <div class="contact-row"><span class="k">City</span><span contenteditable="true">Chicago, IL</span></div>
+      <div class="contact-row"><span class="k">LinkedIn</span><span contenteditable="true">linkedin.com/in/laylabenali</span></div>
+    </div>
+  </div>
+  <div class="header-summary">
+    <div class="sum-left" contenteditable="true">Eight years in communications and brand narrative, primarily at tech companies navigating rapid growth. I write clearly, edit ruthlessly, and translate complicated product decisions into stories that land with general audiences. I have managed crisis communications, executive thought leadership, and content operations at scale.</div>
+    <div class="sum-right">
+      <div class="sum-stat">
+        <div class="sum-n" contenteditable="true">220M</div>
+        <div class="sum-l" contenteditable="true">Total media impressions across three product launches</div>
+      </div>
+      <div class="sum-stat">
+        <div class="sum-n" contenteditable="true">48</div>
+        <div class="sum-l" contenteditable="true">Tier-1 media placements secured in the last two years</div>
+      </div>
+      <div class="sum-stat">
+        <div class="sum-n" contenteditable="true">3x</div>
+        <div class="sum-l" contenteditable="true">Organic traffic growth after content strategy overhaul</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="body">
+  <main class="main">
+    <section class="sect">
+      <div class="sect-h"><span class="num">01</span><span class="title">Experience</span></div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-role" contenteditable="true">Senior Communications Manager</div>
+          <div class="exp-date" contenteditable="true">2021, Now</div>
+        </div>
+        <div class="exp-co"><span contenteditable="true">Clearpath Financial</span><span class="loc" contenteditable="true">Chicago, IL</span></div>
+        <div class="exp-body">
+          <p contenteditable="true">Owned all external communications for a Series C fintech company growing from 80 to 350 employees. Built the PR function from scratch, going from zero press coverage to 48 Tier-1 placements in two years including the Wall Street Journal, TechCrunch, and the Financial Times.</p>
+          <p contenteditable="true">Managed communications for two major product crises, both resolved without any permanent damage to brand sentiment as measured by quarterly brand tracking surveys.</p>
+          <p contenteditable="true">Rewrote the entire content strategy: sunset 40% of underperforming content, shifted focus to three core topics, and grew organic traffic by 3x over 14 months.</p>
+        </div>
+        <div class="exp-tags">
+          <span class="tag" contenteditable="true">PR</span>
+          <span class="tag" contenteditable="true">Crisis Comms</span>
+          <span class="tag" contenteditable="true">Content Strategy</span>
+          <span class="tag" contenteditable="true">Brand</span>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-role" contenteditable="true">Communications Manager</div>
+          <div class="exp-date" contenteditable="true">2018, 2021</div>
+        </div>
+        <div class="exp-co"><span contenteditable="true">Lattice Software</span><span class="loc" contenteditable="true">San Francisco, CA</span></div>
+        <div class="exp-body">
+          <p contenteditable="true">Led communications for three major product launches, generating a combined 220M media impressions. The largest launch was covered by 14 national outlets on the same day.</p>
+          <p contenteditable="true">Wrote and placed 22 executive bylines in publications including Harvard Business Review, Forbes, and Fast Company. All written in collaboration with but not ghostwritten for the founder, who reviewed and approved final copy.</p>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-header">
+          <div class="exp-role" contenteditable="true">Communications Associate</div>
+          <div class="exp-date" contenteditable="true">2016, 2018</div>
+        </div>
+        <div class="exp-co"><span contenteditable="true">Weber Shandwick</span><span class="loc" contenteditable="true">Chicago, IL</span></div>
+        <div class="exp-body">
+          <p contenteditable="true">Supported senior account leads on five B2B technology clients, managing media lists, pitching reporters, and drafting press releases and briefing documents. Handled two accounts independently by the end of my second year.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sect">
+      <div class="sect-h"><span class="num">02</span><span class="title">Community</span></div>
+      <div class="exp-item" style="padding-top:4px;">
+        <div class="exp-header">
+          <div class="exp-role" contenteditable="true">Mentor, UmmahWorks</div>
+          <div class="exp-date" contenteditable="true">2024, Now</div>
+        </div>
+        <div class="exp-co"><span contenteditable="true">Volunteer, Marketing and Comms Track</span></div>
+        <div class="exp-body">
+          <p contenteditable="true">Coaching Muslim professionals transitioning into communications and content strategy roles, with a focus on portfolio building and offer negotiation.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <aside class="sidebar">
+    <div class="side-block">
+      <div class="side-h">Expertise</div>
+      <div class="skill-row"><span class="skill-name" contenteditable="true">Media Relations</span><span class="skill-lvl">Expert</span></div>
+      <div class="skill-row"><span class="skill-name" contenteditable="true">Brand Narrative</span><span class="skill-lvl">Expert</span></div>
+      <div class="skill-row"><span class="skill-name" contenteditable="true">Content Strategy</span><span class="skill-lvl">Strong</span></div>
+      <div class="skill-row"><span class="skill-name" contenteditable="true">Executive Comms</span><span class="skill-lvl">Strong</span></div>
+      <div class="skill-row"><span class="skill-name" contenteditable="true">Crisis Comms</span><span class="skill-lvl">Proficient</span></div>
+      <div class="skill-row"><span class="skill-name" contenteditable="true">SEO &amp; Analytics</span><span class="skill-lvl">Working</span></div>
+    </div>
+
+    <div class="side-block">
+      <div class="side-h">Tools</div>
+      <div class="skill-row"><span contenteditable="true">Cision</span><span class="skill-lvl">Expert</span></div>
+      <div class="skill-row"><span contenteditable="true">Muck Rack</span><span class="skill-lvl">Expert</span></div>
+      <div class="skill-row"><span contenteditable="true">HubSpot</span><span class="skill-lvl">Strong</span></div>
+      <div class="skill-row"><span contenteditable="true">Notion</span><span class="skill-lvl">Strong</span></div>
+      <div class="skill-row"><span contenteditable="true">Airtable</span><span class="skill-lvl">Proficient</span></div>
+    </div>
+
+    <div class="side-block">
+      <div class="side-h">Education</div>
+      <div class="edu-item">
+        <div class="edu-deg" contenteditable="true">B.A. Journalism</div>
+        <div class="edu-school" contenteditable="true">Northwestern University, Medill</div>
+        <div class="edu-yr" contenteditable="true">2016, Magna Cum Laude</div>
+      </div>
+    </div>
+
+    <div class="side-block">
+      <div class="side-h">Awards</div>
+      <div class="award-item">
+        <div class="award-name" contenteditable="true">PR Week 40 Under 40</div>
+        <div contenteditable="true">2023</div>
+      </div>
+      <div class="award-item">
+        <div class="award-name" contenteditable="true">SABRE Award, Best Campaign</div>
+        <div contenteditable="true">Financial Services, 2022</div>
+      </div>
+    </div>
+
+    <div class="side-block">
+      <div class="side-h">Languages</div>
+      <div class="skill-row"><span contenteditable="true">English</span><span class="skill-lvl">Native</span></div>
+      <div class="skill-row"><span contenteditable="true">Arabic</span><span class="skill-lvl">Fluent</span></div>
+      <div class="skill-row"><span contenteditable="true">French</span><span class="skill-lvl">Conversational</span></div>
+    </div>
+  </aside>
+</div>
+
+<footer class="foot">
+  <span class="foot-l">References on request</span>
+  <span class="foot-name" contenteditable="true">Layla Benali</span>
+  <span class="foot-l">UmmahWorks</span>
+</footer>
+</div>
+</div>
+<script>
+function printSinglePage(){
+  var r=document.querySelector('.resume');
+  var s=document.querySelector('#print-css')||document.createElement('style');
+  s.id='print-css';
+  document.head.appendChild(s);
+  var W=r.offsetWidth,H=r.offsetHeight;
+  var scale=816/W;
+  var scaledH=Math.ceil(H*scale);var pageH=scaledH/96;
+  s.textContent=
+    '@page{size:8.5in '+pageH.toFixed(4)+'in;margin:0;}'+
+    '@media print{'+
+      '.toolbar{display:none!important;}'+
+      'html,body{background:white!important;min-height:0!important;margin:0!important;padding:0!important;height:'+scaledH+'px!important;overflow:hidden!important;}'+
+      '.stage{padding:0!important;margin:0!important;max-width:none!important;width:'+W+'px!important;zoom:'+scale.toFixed(4)+';}'+
+      '.resume{box-shadow:none!important;border-radius:0!important;}'+
+      '.name{font-size:74px!important;}'+
+    '}';
+  _showPrintTip();
+}
+function _showPrintTip(){
+  if(!document.getElementById('print-tip-css')){var cs=document.createElement('style');cs.id='print-tip-css';cs.textContent='@media print{#print-tip{display:none!important;}}';document.head.appendChild(cs);}
+  var t=document.getElementById('print-tip');
+  if(!t){
+    t=document.createElement('div');
+    t.id='print-tip';
+    t.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:99999;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif;';
+    t.innerHTML='<div style="background:#fff;padding:36px 40px;max-width:420px;width:90%;border-radius:3px;text-align:center;"><div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#888;margin-bottom:14px;">Before you print</div><div style="font-size:20px;font-weight:700;color:#111;margin-bottom:10px;">Enable Background Graphics</div><div style="font-size:14px;line-height:1.65;color:#555;margin-bottom:28px;">In the print dialog, turn on <strong style="color:#111;">Background graphics</strong> (Chrome / Edge) or <strong style="color:#111;">Background colors &amp; images</strong> (Safari / Firefox) so colors and styling render correctly.</div><button onclick="document.getElementById(\'print-tip\').style.display=\'none\';window.print();" style="padding:12px 32px;background:#111;color:#fff;border:none;border-radius:2px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">Print PDF</button></div>';
+    document.body.appendChild(t);
+  }
+  t.style.display='flex';
+}
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yasmin Khatri — Senior Product Manager</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Barlow+Condensed:wght@400;500;600;700;800&family=Barlow+Semi+Condensed:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --white:#ffffff;
+  --paper:#f5f6f8;
+  --ink:#0f1117;
+  --ink-2:#2c3040;
+  --muted:#7a7f8e;
+  --rule:#dde0e8;
+  --navy:#1a2543;
+  --blue:#2563eb;
+  --blue-pale:#e8f0fe;
+  --teal:#0d9488;
+  --amber:#d97706;
+}
+html,body{background:var(--paper);color:var(--ink);font-family:'Barlow',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh;}
+
+.toolbar{position:sticky;top:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:13px 24px;background:var(--navy);color:#fff;gap:16px;}
+.toolbar-title{font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;}
+.toolbar-hint{font-family:'Barlow',sans-serif;font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.06em;}
+.toolbar-left{display:flex;flex-direction:column;gap:3px;}
+.toolbar-btn{padding:8px 16px;background:var(--blue);color:#fff;border:none;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:13px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap;}
+.toolbar-btn:hover{background:#1d4ed8;}
+
+[contenteditable]{outline:none;cursor:text;transition:background .12s;}
+[contenteditable]:hover{background-color:rgba(37,99,235,.08)!important;outline:1px dashed rgba(37,99,235,.4);}
+[contenteditable]:focus{background-color:rgba(37,99,235,.12)!important;outline:2px solid var(--blue);}
+
+.stage{max-width:1280px;margin:0 auto;padding:28px 28px 80px;}
+.resume{background:var(--white);box-shadow:0 60px 120px -40px rgba(15,17,23,.2),0 0 0 1px rgba(15,17,23,.06);}
+
+/* COVER BAND */
+.cover{background:var(--navy);padding:52px 60px 44px;position:relative;overflow:hidden;}
+.cover::before{content:"";position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--blue) 0 40%,var(--teal) 40% 70%,var(--amber) 70% 100%);}
+.cover-grid{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:start;}
+.cover-quarter{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:14px;}
+.name{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(56px,7vw,88px);line-height:.92;letter-spacing:-.01em;color:#fff;margin-bottom:10px;}
+.role{font-family:'Barlow Semi Condensed',sans-serif;font-weight:400;font-size:20px;color:rgba(255,255,255,.7);margin-bottom:18px;letter-spacing:.01em;}
+.tagline{font-family:'Barlow',sans-serif;font-size:14.5px;line-height:1.6;color:rgba(255,255,255,.6);max-width:52ch;}
+
+.cover-right{min-width:220px;padding-top:8px;}
+.cov-stat{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.12);}
+.cov-stat:last-child{border-bottom:none;}
+.cov-stat-n{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:32px;line-height:1;letter-spacing:-.02em;color:#fff;margin-bottom:4px;}
+.cov-stat-n .unit{font-size:18px;color:rgba(255,255,255,.5);font-weight:400;}
+.cov-stat-n.blue{color:var(--blue);}
+.cov-stat-n.teal{color:#5eead4;}
+.cov-stat-n.amber{color:#fbbf24;}
+.cov-stat-l{font-family:'Barlow',sans-serif;font-size:12px;color:rgba(255,255,255,.5);letter-spacing:.02em;}
+
+/* CONTACT STRIP */
+.contact-strip{background:var(--paper);border-bottom:1px solid var(--rule);padding:14px 60px;display:flex;gap:32px;flex-wrap:wrap;align-items:center;}
+.contact-item{font-size:13px;color:var(--ink-2);display:flex;align-items:center;gap:8px;}
+.contact-item .k{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
+
+/* BODY */
+.body{padding:48px 60px;display:grid;grid-template-columns:1fr 256px;gap:52px;}
+.main{}
+.sidebar{}
+
+/* SECTION */
+.sect{margin-bottom:44px;}
+.sect:last-child{margin-bottom:0;}
+.sect-header{display:flex;align-items:center;gap:14px;margin-bottom:22px;border-bottom:2px solid var(--ink);padding-bottom:10px;}
+.sect-num{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);}
+.sect-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:24px;letter-spacing:.02em;text-transform:uppercase;color:var(--ink);}
+
+/* EXP */
+.exp-item{display:grid;grid-template-columns:170px 1fr;gap:24px;padding:18px 0;border-bottom:1px solid var(--rule);}
+.exp-item:last-child{border-bottom:none;}
+.exp-left{}
+.exp-period{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);display:inline-block;border:2px solid var(--navy);padding:4px 10px;margin-bottom:10px;white-space:nowrap;}
+.exp-co{font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:16px;color:var(--navy);line-height:1.2;margin-bottom:4px;}
+.exp-loc{font-family:'Barlow',sans-serif;font-size:12px;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;}
+.exp-right{}
+.exp-role{font-family:'Barlow',sans-serif;font-weight:600;font-size:16px;color:var(--ink);margin-bottom:4px;}
+.exp-dek{font-size:13px;color:var(--blue);font-weight:500;margin-bottom:12px;font-family:'Barlow Semi Condensed',sans-serif;}
+.bullets{list-style:none;padding:0;display:flex;flex-direction:column;gap:7px;}
+.bullets li{font-size:14px;line-height:1.6;color:var(--ink-2);padding-left:18px;position:relative;text-wrap:pretty;}
+.bullets li::before{content:"";position:absolute;left:0;top:10px;width:8px;height:2px;background:var(--blue);}
+
+/* SIDEBAR */
+.side-block{margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid var(--rule);}
+.side-block:last-child{border-bottom:none;padding-bottom:0;margin-bottom:0;}
+.side-h{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);margin-bottom:14px;}
+
+.comp-item{padding:8px 0;border-bottom:1px dotted var(--rule);display:flex;justify-content:space-between;align-items:center;gap:10px;}
+.comp-item:last-child{border-bottom:none;}
+.comp-name{font-size:13.5px;color:var(--ink);font-weight:500;}
+.comp-tag{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+
+.tag-wrap{display:flex;flex-wrap:wrap;gap:5px;}
+.tag{font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:.08em;padding:4px 10px;border:1px solid var(--rule);color:var(--ink-2);text-transform:uppercase;}
+
+.edu-item{padding:10px 0;border-bottom:1px dotted var(--rule);}
+.edu-item:last-child{border-bottom:none;}
+.edu-deg{font-family:'Barlow Semi Condensed',sans-serif;font-weight:600;font-size:14px;color:var(--ink);}
+.edu-school{font-size:12.5px;color:var(--muted);margin-top:2px;}
+.edu-yr{font-family:'Barlow Condensed',sans-serif;font-size:12px;color:var(--blue);margin-top:4px;letter-spacing:.1em;font-weight:600;}
+
+/* FOOT */
+.foot{background:var(--navy);padding:18px 60px;display:flex;justify-content:space-between;align-items:center;}
+.foot-l{font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);}
+.foot-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:#fff;}
+</style>
+</head>
+<body>
+<div class="toolbar">
+  <div class="toolbar-left">
+    <div class="toolbar-title">The Quarterly, click any text to edit</div>
+    <span class="toolbar-hint">UmmahWorks / Product Management, Strategy, Growth / Refresh to reset</span>
+  </div>
+  <button class="toolbar-btn" onclick="printSinglePage()">Print PDF</button>
+</div>
+<div class="stage">
+<div class="resume">
+
+<div class="cover">
+  <div class="cover-grid">
+    <div>
+      <div class="cover-quarter" contenteditable="true">Senior PM, Q2 2026</div>
+      <h1 class="name" contenteditable="true">Yasmin Khatri</h1>
+      <div class="role" contenteditable="true">Senior Product Manager, Consumer Growth</div>
+      <p class="tagline" contenteditable="true">Eight years shipping consumer products. I own the roadmap, run the experiments, and make the case to leadership when data and intuition disagree. Equally comfortable writing SQL and presenting to the board.</p>
+    </div>
+    <div class="cover-right">
+      <div class="cov-stat">
+        <div class="cov-stat-n blue" contenteditable="true">3.2M</div>
+        <div class="cov-stat-l" contenteditable="true">Monthly active users on products I currently own</div>
+      </div>
+      <div class="cov-stat">
+        <div class="cov-stat-n teal" contenteditable="true">$28M</div>
+        <div class="cov-stat-l" contenteditable="true">ARR growth attributed to experiments I designed</div>
+      </div>
+      <div class="cov-stat">
+        <div class="cov-stat-n amber" contenteditable="true">94</div>
+        <div class="cov-stat-l" contenteditable="true">A/B experiments run across three product areas</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="contact-strip">
+  <div class="contact-item"><span class="k">Email</span><span contenteditable="true">yasmin.khatri@gmail.com</span></div>
+  <div class="contact-item"><span class="k">Phone</span><span contenteditable="true">+1 555 000 0000</span></div>
+  <div class="contact-item"><span class="k">City</span><span contenteditable="true">New York, NY</span></div>
+  <div class="contact-item"><span class="k">LinkedIn</span><span contenteditable="true">linkedin.com/in/yasminkhatri</span></div>
+</div>
+
+<div class="body">
+  <div class="main">
+    <section class="sect">
+      <div class="sect-header"><span class="sect-num">/ 01</span><h2 class="sect-title">Experience</h2></div>
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <span class="exp-period" contenteditable="true">2022 / NOW</span>
+          <div class="exp-co" contenteditable="true">Bloom Consumer</div>
+          <div class="exp-loc" contenteditable="true">New York, NY</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role" contenteditable="true">Senior Product Manager, Growth</div>
+          <div class="exp-dek" contenteditable="true">Owns acquisition, activation, and retention across web and mobile</div>
+          <ul class="bullets">
+            <li contenteditable="true">Redesigned the onboarding flow based on 12 user interviews and 3 months of funnel analysis. Activation rate went from 29% to 54%, adding $14M in ARR over two quarters.</li>
+            <li contenteditable="true">Shipped a referral program that became the top acquisition channel within 4 months, accounting for 28% of new sign-ups at a CAC 60% below paid channels.</li>
+            <li contenteditable="true">Built and managed the product experimentation framework adopted by two other teams, running 40+ tests with statistical rigor and documented outcomes.</li>
+            <li contenteditable="true">Hired two associate PMs, ran their onboarding and 90-day plans; both were promoted to PM within 14 months.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <span class="exp-period" contenteditable="true">2019 / 2022</span>
+          <div class="exp-co" contenteditable="true">Prism Labs</div>
+          <div class="exp-loc" contenteditable="true">San Francisco, CA</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role" contenteditable="true">Product Manager</div>
+          <div class="exp-dek" contenteditable="true">Core product, notifications, and mobile app</div>
+          <ul class="bullets">
+            <li contenteditable="true">Launched the notification personalization engine, reducing unsubscribes by 34% and increasing click-through rates by 22%.</li>
+            <li contenteditable="true">Shipped 14 feature releases across two platforms in 18 months, managing a three-person engineering team and a designer through the full cycle from spec to launch.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item">
+        <div class="exp-left">
+          <span class="exp-period" contenteditable="true">2017 / 2019</span>
+          <div class="exp-co" contenteditable="true">MindBridge Analytics</div>
+          <div class="exp-loc" contenteditable="true">Boston, MA</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role" contenteditable="true">Associate Product Manager</div>
+          <div class="exp-dek" contenteditable="true">APM program, first cohort</div>
+          <ul class="bullets">
+            <li contenteditable="true">Built the MVP for a B2B analytics dashboard from wireframes to GA, including conducting 18 customer discovery interviews and writing the full product spec.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="sect">
+      <div class="sect-header"><span class="sect-num">/ 02</span><h2 class="sect-title">Community</h2></div>
+      <div class="exp-item" style="border:none;padding-top:4px;">
+        <div class="exp-left">
+          <span class="exp-period" contenteditable="true">2024 / NOW</span>
+          <div class="exp-co" contenteditable="true">UmmahWorks</div>
+          <div class="exp-loc" contenteditable="true">Volunteer Mentor</div>
+        </div>
+        <div class="exp-right">
+          <div class="exp-role" contenteditable="true">PM Mentor, Growth Track</div>
+          <ul class="bullets">
+            <li contenteditable="true">Providing resume reviews, mock interviews, and product critique sessions for Muslim PMs at the junior and mid level.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <aside class="sidebar">
+    <div class="side-block">
+      <div class="side-h">Core Competencies</div>
+      <div class="comp-item"><span class="comp-name" contenteditable="true">Growth Strategy</span><span class="comp-tag">Expert</span></div>
+      <div class="comp-item"><span class="comp-name" contenteditable="true">A/B Experimentation</span><span class="comp-tag">Expert</span></div>
+      <div class="comp-item"><span class="comp-name" contenteditable="true">Data Analysis</span><span class="comp-tag">Strong</span></div>
+      <div class="comp-item"><span class="comp-name" contenteditable="true">Roadmapping</span><span class="comp-tag">Expert</span></div>
+      <div class="comp-item"><span class="comp-name" contenteditable="true">User Research</span><span class="comp-tag">Proficient</span></div>
+      <div class="comp-item"><span class="comp-name" contenteditable="true">Go-to-Market</span><span class="comp-tag">Strong</span></div>
+    </div>
+
+    <div class="side-block">
+      <div class="side-h">Tooling</div>
+      <div class="tag-wrap">
+        <span class="tag" contenteditable="true">Amplitude</span>
+        <span class="tag" contenteditable="true">Mixpanel</span>
+        <span class="tag" contenteditable="true">SQL</span>
+        <span class="tag" contenteditable="true">Looker</span>
+        <span class="tag" contenteditable="true">Jira</span>
+        <span class="tag" contenteditable="true">Linear</span>
+        <span class="tag" contenteditable="true">Figma</span>
+        <span class="tag" contenteditable="true">Notion</span>
+        <span class="tag" contenteditable="true">LaunchDarkly</span>
+      </div>
+    </div>
+
+    <div class="side-block">
+      <div class="side-h">Education</div>
+      <div class="edu-item">
+        <div class="edu-deg" contenteditable="true">B.S. Computer Science</div>
+        <div class="edu-school" contenteditable="true">Boston University</div>
+        <div class="edu-yr" contenteditable="true">2017, GPA 3.79</div>
+      </div>
+    </div>
+
+    <div class="side-block">
+      <div class="side-h">Languages</div>
+      <div class="comp-item"><span class="comp-name" contenteditable="true">English</span><span class="comp-tag">Native</span></div>
+      <div class="comp-item"><span class="comp-name" contenteditable="true">Urdu</span><span class="comp-tag">Fluent</span></div>
+      <div class="comp-item"><span class="comp-name" contenteditable="true">Hindi</span><span class="comp-tag">Conversational</span></div>
+    </div>
+  </aside>
+</div>
+
+<footer class="foot">
+  <span class="foot-l">References available on request</span>
+  <span class="foot-name" contenteditable="true">Yasmin Khatri</span>
+  <span class="foot-l" contenteditable="true">New York, NY</span>
+</footer>
+</div>
+</div>
+<script>
+function printSinglePage(){
+  var r=document.querySelector('.resume');
+  var s=document.querySelector('#print-css')||document.createElement('style');
+  s.id='print-css';
+  document.head.appendChild(s);
+  var W=r.offsetWidth,H=r.offsetHeight;
+  var scale=816/W;
+  var scaledH=Math.ceil(H*scale);var pageH=scaledH/96;
+  s.textContent=
+    '@page{size:8.5in '+pageH.toFixed(4)+'in;margin:0;}'+
+    '@media print{'+
+      '.toolbar{display:none!important;}'+
+      'html,body{background:white!important;min-height:0!important;margin:0!important;padding:0!important;height:'+scaledH+'px!important;overflow:hidden!important;}'+
+      '.stage{padding:0!important;margin:0!important;max-width:none!important;width:'+W+'px!important;zoom:'+scale.toFixed(4)+';}'+
+      '.resume{box-shadow:none!important;border-radius:0!important;}'+
+      '.name{font-size:88px!important;}'+
+    '}';
+  _showPrintTip();
+}
+function _showPrintTip(){
+  if(!document.getElementById('print-tip-css')){var cs=document.createElement('style');cs.id='print-tip-css';cs.textContent='@media print{#print-tip{display:none!important;}}';document.head.appendChild(cs);}
+  var t=document.getElementById('print-tip');
+  if(!t){
+    t=document.createElement('div');
+    t.id='print-tip';
+    t.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:99999;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif;';
+    t.innerHTML='<div style="background:#fff;padding:36px 40px;max-width:420px;width:90%;border-radius:3px;text-align:center;"><div style="font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:#888;margin-bottom:14px;">Before you print</div><div style="font-size:20px;font-weight:700;color:#111;margin-bottom:10px;">Enable Background Graphics</div><div style="font-size:14px;line-height:1.65;color:#555;margin-bottom:28px;">In the print dialog, turn on <strong style="color:#111;">Background graphics</strong> (Chrome / Edge) or <strong style="color:#111;">Background colors &amp; images</strong> (Safari / Firefox) so colors and styling render correctly.</div><button onclick="document.getElementById(\'print-tip\').style.display=\'none\';window.print();" style="padding:12px 32px;background:#111;color:#fff;border:none;border-radius:2px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">Print PDF</button></div>';
+    document.body.appendChild(t);
+  }
+  t.style.display='flex';
+}
+</script>
+
+
+</body>
+</html>
