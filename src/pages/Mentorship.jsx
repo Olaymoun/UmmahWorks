@@ -22,7 +22,7 @@ const CARD_GRADS = [
 ]
 
 const principles = [
-  { n: '/ 01', h: 'Twenty minutes, on their time', p: 'Our mentors volunteer what time they can spare. We believe a single, focused conversation can change a career trajectory, so we never ask for long commitments.' },
+  { n: '/ 01', h: 'Twenty minutes, on your time', p: 'Our mentors volunteer what time they can spare. We believe a single, focused conversation can change a career trajectory, so we never ask for long commitments.' },
   { n: '/ 02', h: 'Match, do not match-make', p: 'We personally handle the logistics of finding the right person. There are no complicated dashboards or rating systems to manage, allowing you to focus purely on the conversation.' },
   { n: '/ 03', h: 'Off the record', p: 'We know that career conversations require vulnerability and trust. Everything discussed remains strictly confidential between you and the person you are speaking with.' },
   { n: '/ 04', h: 'No hierarchy of care', p: 'Every community member receives the same level of thoughtfulness, whether they are an intern looking for their first role or a staff engineer navigating a complex offer.' },
@@ -262,7 +262,7 @@ export default function Mentorship() {
             Share a bit about your background and what topics you are most comfortable discussing. We personally review every application so we can respect your time and only send relevant requests your way. We will be in touch within a few days to get you set up.
           </p>
           <blockquote className="font-instrument italic" style={{ fontSize: 19, lineHeight: 1.5, color: 'var(--ink-2)', maxWidth: '52ch', marginTop: 24, marginBottom: 18, paddingLeft: 20, borderLeft: '2px solid var(--accent-2)' }}>
-            A Muslim is a brother of another Muslim, so he should not oppress him, nor should he hand him over to an oppressor. Whoever fulfilled the needs of his brother, Allah will fulfill his needs; whoever brought his brother out of a discomfort, Allah will bring him out of the discomforts of the Day of Resurrection, and whoever screened a Muslim, Allah will screen him on the Day of Resurrection.
+            Allah's Messenger (ﷺ) said, "A Muslim is a brother of another Muslim, so he should not oppress him, nor should he hand him over to an oppressor. Whoever fulfilled the needs of his brother, Allah will fulfill his needs; whoever brought his (Muslim) brother out of a discomfort, Allah will bring him out of the discomforts of the Day of Resurrection, and whoever conceals the faults of a Muslim, Allah will conceal his faults on the Day of Resurrection."
             <span className="block mt-[6px] font-mono text-[10px] tracking-[.16em] uppercase text-muted not-italic">
               Prophetic tradition · Sahih al-Bukhari
             </span>
