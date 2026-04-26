@@ -1,11 +1,11 @@
 import { neon } from '@neondatabase/serverless'
 import { Resend } from 'resend'
-import { GoogleGenerativeAI } from '@google/generative-ai'
+import { generateText } from 'ai'
+import { google } from '@ai-sdk/google'
 import { parseDomains } from './_lib/domains.js'
 import { checkRateLimit } from './_lib/ratelimit.js'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
-const genai = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
 const ADMIN = 'salaam@ummahworks.org'
 const FROM = 'UmmahWorks <forms@ummahworks.org>'
 
@@ -19,9 +19,11 @@ async function generateBio(name, role, company, topics, linkedinText) {
   ].filter(Boolean).join('\n')
 
   try {
-    const model = genai.getGenerativeModel({ model: 'gemini-2.0-flash' })
-    const result = await model.generateContent(`Write a 2-3 sentence third-person mentor bio for a career mentorship platform called UmmahWorks, serving Muslim professionals. Be specific, warm, and professional. Focus on their background and what they are best positioned to help mentees with. Do not mention the platform by name. Write only the bio with no extra text.\n\n${context}`)
-    return result.response.text()?.trim() || null
+    const { text } = await generateText({
+      model: google('gemini-2.5-flash'),
+      prompt: `Write a 2-3 sentence third-person mentor bio for a career mentorship platform called UmmahWorks, serving Muslim professionals. Be specific, warm, and professional. Focus on their background and what they are best positioned to help mentees with. Do not mention the platform by name. Write only the bio with no extra text.\n\n${context}`,
+    })
+    return text?.trim() || null
   } catch {
     return null
   }
@@ -29,18 +31,46 @@ async function generateBio(name, role, company, topics, linkedinText) {
 
 async function fetchLinkedInText(url) {
   if (!url) return ''
+  const liAt = process.env.LINKEDIN_LI_AT
+  const jsessionId = process.env.LINKEDIN_JSESSIONID
+  if (!liAt || !jsessionId) return ''
+
   try {
-    const r = await fetch(url, {
+    const vanity = url.match(/linkedin\.com\/in\/([^/?#]+)/i)?.[1]
+    if (!vanity) return ''
+
+    const csrfToken = jsessionId.replace(/^"|"$/g, '')
+
+    const r = await fetch(`https://www.linkedin.com/voyager/api/identity/dash/profiles?q=memberIdentity&memberIdentity=${vanity}&decorationId=com.linkedin.voyager.dash.deco.identity.profile.FullProfileWithEntities-91`, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
-        'Accept': 'text/html',
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+        'Accept': 'application/vnd.linkedin.normalized+json+2.1',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'x-li-lang': 'en_US',
+        'x-restli-protocol-version': '2.0.0',
+        'csrf-token': csrfToken,
+        'cookie': `li_at=${liAt}; JSESSIONID="${csrfToken}"`,
       },
-      signal: AbortSignal.timeout(5000),
+      signal: AbortSignal.timeout(8000),
     })
-    const html = await r.text()
-    const title = html.match(/<title[^>]*>([^<]+)<\/title>/i)?.[1] || ''
-    const desc = html.match(/<meta[^>]+name="description"[^>]+content="([^"]+)"/i)?.[1] || ''
-    return `${title} ${desc}`
+
+    if (!r.ok) return ''
+    const data = await r.json()
+
+    const profile = data?.included?.find(e => e?.$type?.includes('dash.identity.profile.Profile') && e.firstName)
+    if (!profile) return ''
+
+    const headline = profile.headline ?? ''
+    const summary = profile.summary ?? ''
+    const firstName = profile.firstName ?? ''
+    const lastName = profile.lastName ?? ''
+    const positions = data.included
+      ?.filter(e => e?.$type?.includes('Position') && e.title)
+      ?.slice(0, 3)
+      ?.map(p => `${p.title} at ${p.companyName || ''}`)
+      ?.join(', ') ?? ''
+
+    return [firstName, lastName, headline, summary, positions].filter(Boolean).join(' ')
   } catch {
     return ''
   }

@@ -1,9 +1,71 @@
 import { neon } from '@neondatabase/serverless'
 import { Resend } from 'resend'
+import { generateText } from 'ai'
+import { google } from '@ai-sdk/google'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 const FROM = 'UmmahWorks <salaam@ummahworks.org>'
 const BASE_URL = 'https://ummahworks.org'
+
+async function fetchLinkedInText(url) {
+  if (!url) return ''
+  const liAt = process.env.LINKEDIN_LI_AT
+  const jsessionId = process.env.LINKEDIN_JSESSIONID
+  if (!liAt || !jsessionId) return ''
+  try {
+    const vanity = url.match(/linkedin\.com\/in\/([^/?#]+)/i)?.[1]
+    if (!vanity) return ''
+    const csrfToken = jsessionId.replace(/^"|"$/g, '')
+    const r = await fetch(`https://www.linkedin.com/voyager/api/identity/dash/profiles?q=memberIdentity&memberIdentity=${vanity}&decorationId=com.linkedin.voyager.dash.deco.identity.profile.FullProfileWithEntities-91`, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+        'Accept': 'application/vnd.linkedin.normalized+json+2.1',
+        'Accept-Language': 'en-US,en;q=0.9',
+        'x-li-lang': 'en_US',
+        'x-restli-protocol-version': '2.0.0',
+        'csrf-token': csrfToken,
+        'cookie': `li_at=${liAt}; JSESSIONID="${csrfToken}"`,
+      },
+      signal: AbortSignal.timeout(8000),
+    })
+    if (!r.ok) return ''
+    const data = await r.json()
+    const profile = data?.included?.find(e => e?.$type?.includes('dash.identity.profile.Profile') && e.firstName)
+    if (!profile) return ''
+    const headline = profile.headline ?? ''
+    const summary = profile.summary ?? ''
+    const firstName = profile.firstName ?? ''
+    const lastName = profile.lastName ?? ''
+    const positions = data.included
+      ?.filter(e => e?.$type?.includes('Position') && e.title)
+      ?.slice(0, 3)
+      ?.map(p => `${p.title} at ${p.companyName || ''}`)
+      ?.join(', ') ?? ''
+    return [firstName, lastName, headline, summary, positions].filter(Boolean).join(' ')
+  } catch {
+    return ''
+  }
+}
+
+async function generateBio(name, role, company, topics, linkedinText) {
+  const context = [
+    `Name: ${name}`,
+    `Role: ${role || 'not specified'}`,
+    `Company: ${company || 'not specified'}`,
+    `What they can help with: ${topics || 'not specified'}`,
+    linkedinText ? `LinkedIn context: ${linkedinText.slice(0, 400)}` : null,
+  ].filter(Boolean).join('\n')
+  try {
+    const { text } = await generateText({
+      model: google('gemini-2.5-flash'),
+      prompt: `Write a 2-3 sentence third-person mentor bio for a career mentorship platform called UmmahWorks, serving Muslim professionals. Be specific, warm, and professional. Focus on their background and what they are best positioned to help mentees with. Do not mention the platform by name. Write only the bio with no extra text.\n\n${context}`,
+    })
+    return text?.trim() || null
+  } catch (err) {
+    console.error('[generateBio]', err.message)
+    return null
+  }
+}
 
 function auth(req) {
   const h = req.headers.authorization
@@ -122,6 +184,16 @@ export default async function handler(req, res) {
         WHERE id = ${id}
       `
       return res.status(200).json({ ok: true })
+    }
+
+    if (action === 'regenerate_bio') {
+      const [mentor] = await sql`SELECT name, role, company, linkedin, topics FROM mentors WHERE id = ${id}`
+      if (!mentor) return res.status(404).json({ error: 'Mentor not found.' })
+      const linkedinText = await fetchLinkedInText(mentor.linkedin)
+      const bio = await generateBio(mentor.name, mentor.role, mentor.company, mentor.topics, linkedinText)
+      if (!bio) return res.status(500).json({ error: 'Could not generate bio.' })
+      await sql`UPDATE mentors SET bio = ${bio} WHERE id = ${id}`
+      return res.status(200).json({ ok: true, bio })
     }
 
     return res.status(400).json({ error: 'Unknown action.' })
